@@ -1,0 +1,22 @@
+<h1>Please Sign In Below</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+
+<%= form_for(:session, url: sessions_create_path) do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control' %>
+<br>
+<%= f.label :password %>
+<%= f.password_field :password, class: 'form-control' %>
+<br>
+<%= f.submit "Sign In", class: "btn btn-primary" %>
+<% end %>
+<br>
+<h3>New Physician? <%= link_to "Signup as a Physician!", new_physician_path %></h3><br>
+<h3>New Patient? <%= link_to "Signup as a Patient!", new_patient_path %></h3><br>
+<h2><p><a href='/auth/facebook'> Login with Facebook</a></p></h2>
+<h3><%= link_to "Back", root_path, class:"btn btn-primary btn-light" %></h3>
+</div>
+</div>
