@@ -1,1 +1,20 @@
-<h1> You are logged in</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <td><%= @physician.name %></td>
+    </tr>
+    <tr>
+      <th>Specialty</th>
+      <td><%= @physician.specialty %></td>
+    </tr>
+</table>
+
+
+
+
+
+<p><%= link_to "Edit Your Info", edit_physician_path(@physician), class:"btn btn-primary btn-light"  %></p>
+<p><%= link_to "See All Appointments", appointment_path, class:"btn btn-primary btn-light" %></p>
+<p><%= link_to "Create New Appointment", appointment_path, class:"btn btn-primary btn-light" %></p>
+<p><%= link_to "Back", physicians_path %></p>
+<p><%= link_to "Logout", logout_path, class:"btn btn-primary btn-light" %></p>

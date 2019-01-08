@@ -1,5 +1,5 @@
 class PhysiciansController < ApplicationController
-  before_action :find_physician, [:index, :new, :create]
+  before_action :find_physician, only: [:show, :edit, :update]
 
   def index
     @physicians = Physician.all
@@ -45,12 +45,12 @@ class PhysiciansController < ApplicationController
     private
 
     def find_physician
-      @physician = Physician.find_by(params[:id])
+      @physician = Physician.find(params[:id])
     end
 
 
     def physician_params
-      params.require(:physician).permit(:name, :specialty, :email, :password)
+      params.require(:physician).permit(:name, :specialty, :email, :password_digest)
     end
 
 
