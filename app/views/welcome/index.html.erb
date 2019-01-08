@@ -1,2 +1,32 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<h1> Welcome to AppointmentMD<h1>
+  <br></br>
+  <br></br>
+
+
+
+
+
+
+<h4>If You are a new Patient, please Sign Up by clicking the link below</h4>
+<h2>
+  <p>
+    <%= link_to "Patient Sign Up", new_patient_path, class:"btn btn-primary btn-light" %>
+  </p>
+  <br>
+</h2>
+
+If You are a Physician, please Sign Up by clicking the link below
+<h2>
+  <p>
+    <%= link_to "Physician Sign Up", new_physician_path, class:"btn btn-primary btn-light" %>
+  </p>
+  <br>
+</h2>
+
+
+<h2>Click to Login
+  <p>
+    <%= link_to "Login", signin_path, class:"btn btn-primary btn-light" %>
+  </p>
+  <br>
+</h2>
