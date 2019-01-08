@@ -1,2 +1,7 @@
-<h1>Physicians#new</h1>
-<p>Find me in app/views/physicians/new.html.erb</p>
+<h1>Physician Sign Up Page<h1>
+<%= link_to("Sign Up with Facebook", "auth/facebook", class: "home-page-link") %>
+
+
+<%= render 'form' %>
+
+<%= link_to "Back", root_path, class:"btn btn-primary btn-light" %>

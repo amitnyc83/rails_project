@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 
  gem 'omniauth-facebook'
 
+ gem 'thin'
+
  gem 'dotenv-rails'
 
 # Use ActiveStorage variant

@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 2019_01_08_151453) do
 
   create_table "physicians", force: :cascade do |t|
     t.string "name"
-    t.text "email"
-    t.text "password_digest"
-    t.text "specialty"
+    t.string "email"
+    t.string "image"
+    t.string "uid"
+    t.string "password_digest"
+    t.string "specialty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
