@@ -1,0 +1,24 @@
+<%= form_for (@appointment) do |f| %>
+<p>
+<%= f.label :date %><br>
+<%= f.date_field :date %>
+</p>
+
+<p>
+  <%= f.label :time %><br>
+  <%= f.time_field :time %>
+</p>
+
+<p>
+  <%= f.label :physician_id, "Physician" %><br>
+  <%= f.collection_select (:physician_id, Physician.all, :id, :name, include_blank: "Select a physician") %>
+</p>
+
+
+<p>
+  <%= f.label (:patient_id, "Patient") %><br>
+  <%= f.collection_select (:patient_id, Patient.all, :id, :name, include_blank: "Select a patient") %>
+</p>
+
+<%= f.submit %>
+<% end %>

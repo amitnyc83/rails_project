@@ -23,7 +23,7 @@ class PhysiciansController < ApplicationController
         redirect_to physician_path(@physician)
       else
         flash[:notice] = "There was an error creating a new Physician"
-        render 'physician/new'
+        render 'physicians/new'
       end
     end
 
@@ -36,7 +36,7 @@ class PhysiciansController < ApplicationController
         redirect_to physician_path(@physician)
       else
         flash[:notice] = "Error updating Info! Plz make sure all fileds are filled out."
-        render 'physician/new'
+        render 'physicians/new'
       end
     end
 
