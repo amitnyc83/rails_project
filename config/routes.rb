@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'appointments/new'
+  get 'patients/new'
+  get 'physicians/new'
   get 'welcome/index'
 
 
