@@ -10,15 +10,15 @@
 </p>
 
 <p>
-  <%= f.label (:physician_id, "Physician") %><br>
+  <%= f.label :physician_id, "Physician" %><br>
   <%= current_physician.name %>
   <%= f.hidden_field :physician_id, :value => current_physician.id %>
 </p>
 
 
 <p>
-  <%= f.label (:patient_id, "Patient") %><br>
-  <%= f.collection_select (:patient_id, Patient.all, :id, :name, include_blank: "Select a patient") %>
+  <%= f.label :patient_id, "Patient" %><br>
+  <%= f.collection_select :patient_id, Patient.all, :id, :name, include_blank: "Select a patient" %>
 </p>
 
 <%= f.submit %>
