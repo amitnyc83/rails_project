@@ -10,8 +10,9 @@
 </p>
 
 <p>
-  <%= f.label :physician_id, "Physician" %><br>
-  <%= f.collection_select (:physician_id, Physician.all, :id, :name, include_blank: "Select a physician") %>
+  <%= f.label (:physician_id, "Physician") %><br>
+  <%= current_physician.name %>
+  <%= f.hidden_field :physician_id, :value => current_physician.id %>
 </p>
 
 

@@ -22,7 +22,7 @@ class PatientsController < ApplicationController
       flash[:notice] = "You have successfully created an account"
       redirect_to patient_path(@patient)
     else
-      flash[:notice] = "Ther was an error "
+      flash[:notice] = "There was an error "
       render "patients/new"
   end
 end
@@ -44,7 +44,7 @@ end
 
 
   def patient_params
-    params.require(:patient).permit(:name, :age, :password_digest, :email, :date_of_birth)
+    params.require(:patient).permit(:name, :email, :password_digest, :age, :date_of_birth)
   end
 
 

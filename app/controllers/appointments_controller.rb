@@ -1,4 +1,6 @@
 class AppointmentsController < ApplicationController
+  before_action :login_required
+  before_action :find_apppointment, exccept: [:index, :new, :create]
 
 
 
@@ -36,7 +38,7 @@ class AppointmentsController < ApplicationController
       redirect_to @appointment
     else
       render edit_appointment_path(@appointment)
-    end 
+    end
   end
 
 
@@ -47,7 +49,7 @@ class AppointmentsController < ApplicationController
   end
 
   def find_appointment
-    @appointmennt = Appointment.find_by(:id params[:id])
+    @appointment = Appointment.find(params[:id])
   end
 
 end
