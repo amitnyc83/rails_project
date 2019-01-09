@@ -35,6 +35,13 @@ class SessionsController < ApplicationController
      end
    end
 
+
+   def destroy
+     reset_session
+     flash[:notice] = "You have sucessfully logged out"
+     redirect_to root_path
+   end 
+
   private
 
 

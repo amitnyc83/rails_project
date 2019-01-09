@@ -50,7 +50,7 @@ class PhysiciansController < ApplicationController
 
 
     def physician_params
-      params.require(:physician).permit(:name, :specialty, :email, :password_digest)
+      params.require(:physician).permit(:name, :email, :uid, :specialty, :email, :password_digest)
     end
 
 

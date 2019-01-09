@@ -1,0 +1,27 @@
+<h1>Patient Profile Page</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <td>@patient.name</td>
+  </tr>
+  <tr>
+    <th>Age</th>
+    <td>@patient.age</td>
+  </tr>
+  <tr>
+    <th>Date of Birth</th>
+    <td>@patient.date_of_birth</td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td>@patient.email</td>
+  </tr>
+</table>
+
+
+<% if @patient.appointments %>
+<%= link_to "View your appointments", patient_appointments_path(@patient) %>
+<% end %>
+<% if @patient == @current_patient %>
+<%= link_to "Edit Your Info", edit_patient_path %>
+<% end %>

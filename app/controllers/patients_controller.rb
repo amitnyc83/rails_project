@@ -23,8 +23,9 @@ class PatientsController < ApplicationController
       redirect_to patient_path(@patient)
     else
       flash[:notice] = "Ther was an error "
+      render "patients/new"
   end
-end 
+end
 
 
   def edit

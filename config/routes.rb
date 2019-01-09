@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'signin' => 'sessions#new'
   post '/sessions/create' => 'sessions#create'
-  delete '/logout' => 'sessions#destroy'
+  get '/logout' => 'sessions#destroy'
 
 
   get '/auth/facebook/callback' => 'sessions#create'
