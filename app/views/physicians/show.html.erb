@@ -1,20 +1,31 @@
+<% if @physician = current_physician %>
+<h1>Welcome to your HomePage</h1>
+<% else %>
+<h1>Physician View </h1>
+<% end %>
+
 <table>
   <tr>
     <th>Name</th>
     <td><%= @physician.name %></td>
-    </tr>
-    <tr>
-      <th>Specialty</th>
-      <td><%= @physician.specialty %></td>
-    </tr>
+  </tr>
+  <tr>
+    <th>Specialty</th>
+    <td><%= @physician.specialty %></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= @physician.email %></td>
+  </tr>
 </table>
 
 
-
-
-
-<p><%= link_to "Edit Your Info", edit_physician_path, class:"btn btn-primary btn-light"  %></p>
+<% if @physician == current_physician %>
+<p><%= link_to "View Your Appointments", physician_appointments_path(@physician), class:"btn btn-primary btn-light"  %></p>
+<p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"btn btn-primary btn-light"  %></p>
+<p><%= link_to "Edit Your Personal Info", edit_physician_path, class:"btn btn-primary btn-light"  %></p>
+<% end %>
+<p><%= link_to "View All Physician", physicians_path, class:"btn btn-primary btn-light" %><p>
 <p><%= link_to "See All Appointments", appointment_path, class:"btn btn-primary btn-light" %></p>
-<p><%= link_to "Create New Appointment",new_appointment_path, class:"btn btn-primary btn-light" %></p>
 <p><%= link_to "Back", physicians_path %></p>
 <p><%= link_to "Logout", logout_path, class:"btn btn-primary btn-light" %></p>

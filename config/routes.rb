@@ -7,8 +7,14 @@ Rails.application.routes.draw do
 
 
   resources :appointments
-  resources :patients
-  resources :physicians
+
+  resources :patients, except: :index do
+    resources :appointments
+  end
+
+  resources :physicians do
+    resources :appointments
+  end
 
 
   get 'signin' => 'sessions#new'

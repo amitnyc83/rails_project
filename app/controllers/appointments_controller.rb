@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :login_required
-  before_action :find_apppointment, exccept: [:index, :new, :create]
+  before_action :find_apppointment, except: [:index, :new, :create]
 
 
 
@@ -10,12 +10,18 @@ class AppointmentsController < ApplicationController
 
 
   def show
-    find_appointment
   end
 
 
   def index
-    @appointments = Appointments.all
+    if @current_patient
+      @appointments = Appointment.where("patient_id", @current_patient.id)
+    elsif @current_physician
+      @appointments = Appointment.where("physician_id", @current_physician.id)
+    else
+      flash[:notice] = "You need to log in to view this page"
+      redirect_to root_path
+    end
   end
 
 

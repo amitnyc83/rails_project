@@ -1,4 +1,4 @@
-<%= form_for (@patient) do |f| %>
+<h2><%= form_for (@patient) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
@@ -6,13 +6,13 @@
   <%= f.email_field :email %>
   <br>
   <%= f.label :password %>
-  <%= f.text_field :password %>
+  <%= f.password_field :password %>
   <br>
   <%= f.label :age %>
   <%= f.text_field :age %>
   <br>
   <%= f.label :date_of_birth %>
-  <%= f.date_field :date_of_birth %>
+  <%= f.date_field :date_of_birth %></h2>
   <br>
   <%= f.submit %>
   <% end %>
