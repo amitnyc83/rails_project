@@ -1,0 +1,18 @@
+<h1>All Physician in AppointmentMD </h1>
+
+<% @physicians.each do |physician| %>
+<table>
+  <tr>
+    <th>Name</th>
+    <td><%= physician.name %></td>
+  </tr>
+  <tr>
+    <th>Specialty</th>
+    <td<%= physician.specialty %></td>
+    </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= physician.specialty %></td>
+  </tr>
+  <% end %>
+  </table>
