@@ -3,16 +3,6 @@ class AppointmentsController < ApplicationController
   before_action :find_apppointment, except: [:index, :new, :create]
 
 
-
-  def new
-    @appointment = Appointment.new
-  end
-
-
-  def show
-  end
-
-
   def index
     if @current_patient
       @appointments = Appointment.where("patient_id", @current_patient.id)
@@ -25,11 +15,35 @@ class AppointmentsController < ApplicationController
   end
 
 
+
+  def new
+    @appointment = Appointment.new
+    unless logged_in? && @current_physician
+      flash[:notice] "You must be a Physician to create an appointment"
+      if !logged_in?
+        redirect_to root_path
+      else
+        redirect_to patient_path(@current_patient)
+     end
+    end
+  end
+
+
+  def show
+  end
+
+
+
+
+
   def create
     @appointment = Appointment.new(appointment_params)
+    if @current_physician
     if @appointment.save
+      flash[:notice] = "Appointment was successfully created"
       redirect_to appointment_path(@appointment)
     else
+      flash[:notice] = "There was an error creating this appointment"
       render 'appointments/new'
     end
   end
