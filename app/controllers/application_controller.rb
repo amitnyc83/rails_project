@@ -17,7 +17,7 @@ end
 def login_required
   if !logged_in?
     flash[:notice] = "Please login to view this page."
-    redirect_to login_path
+    redirect_to signin_path
   end
 end
 
