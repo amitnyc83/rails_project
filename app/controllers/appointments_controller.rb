@@ -19,7 +19,7 @@ class AppointmentsController < ApplicationController
   def new
     @appointment = Appointment.new
     unless logged_in? && @current_physician
-      flash[:notice] "You must be a Physician to create an appointment"
+      flash[:notice] = "You must be a Physician to create an appointment"
       if !logged_in?
         redirect_to root_path
       else
@@ -39,13 +39,14 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     if @current_physician
-    if @appointment.save
+     if @appointment.save
       flash[:notice] = "Appointment was successfully created"
       redirect_to appointment_path(@appointment)
-    else
+     else
       flash[:notice] = "There was an error creating this appointment"
       render 'appointments/new'
     end
+   end
   end
 
 

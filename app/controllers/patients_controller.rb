@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+  before_action :login_required, except: [:new, :create]
  before_action :find_patient, only: [:show, :edit, :update]
 
 
@@ -8,6 +9,11 @@ class PatientsController < ApplicationController
 
 
   def new
+    if @current_physician
+      redirect_to physician_path(@current_physician)
+    elsif @current_patient
+      redirect_to patient_path(@current_patient)
+    end
     @patient = Patient.new
   end
 

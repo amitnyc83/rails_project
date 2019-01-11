@@ -2,10 +2,10 @@
 
 <%= form_for @physician do |f| %>
 
-<%= render :partial = 'form', locals: {physician: => @physician, f: => f} %>
+<%= render :partial => "form", :locals => { :physician => @physician, :f => f} %>
 
 <%= f.label :password %>
-<%= f.password_field :password %>
+<%= f.text_field :password %>
 <br>
 <%= f.submit "Signup" %>
 <% end %>
