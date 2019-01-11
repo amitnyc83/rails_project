@@ -1,0 +1,6 @@
+<h1>Appointment</h1>
+
+<%= render :partial => "view", :locals => { :appointment => @appointment} %>
+
+<%= link_to "View All Appointments", appointments_path %><br>
+<%= link_to "Edit Appointment", edit_appointment_path(@appointment) %><br>

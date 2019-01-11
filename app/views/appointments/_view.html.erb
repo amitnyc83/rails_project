@@ -1,0 +1,44 @@
+<table>
+
+  <tr>
+    <th>Date</th>
+    <td><%= appointment.date %></td>
+  </tr>
+
+  <tr>
+    <th>Time</th>
+    <td><%= appointment.time %></td>
+  </tr>
+
+
+<% if current_page?(appointment_path(appointment)) %>
+  <tr>
+    <th>Patient</th>
+    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
+  </tr>
+
+  <tr>
+    <th>Physician</th>
+    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
+  </tr>
+  <% elsif current_page?(physician_path(appointment.physician)) %>
+  <tr>
+    <th>Patient</th>
+    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
+  </tr>
+  <% elsif current_page?(patient_path(appointment.patient)) %>
+  <tr>
+    <th>Physician</th>
+    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
+  </tr>
+  <% else %>
+  <tr>
+    <th>Physician</th>
+    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
+  </tr>
+
+  <tr>
+    <th>Patient</th>
+    <td><%= link_to appointmemt.patient.name, patient_path(appointment.patient) %></td>
+  </tr>
+  <% end %> 
