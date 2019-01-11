@@ -1,6 +1,12 @@
 <h1>Patient Sign Up Page</h1>
 
+<%= form_for @patient do |patient| %>
 
-<%= render 'form' %>
+<%= render :partial => 'form', locals: {patient: @patient} %>
 
+<%= f.label :password %>
+<%= f.password_field :password %>
+<br>
+<%= f.submit "Signup" %>
+<% end %>
 <%= link_to "Back", root_path, class:"btn btn-primary btn-light" %>

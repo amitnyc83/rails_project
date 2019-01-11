@@ -28,15 +28,32 @@ class PhysiciansController < ApplicationController
     end
 
     def edit
+      if @current_physician
+        unless @current_physician = @physician
+          redirect_to physician_path(@current_physician)
+        end
+      elsif @current_patient
+        redirect_to patient_path(@current_patient)
+      else
+        redirect_to root_path
+      end
     end
 
 
     def update
-      if @physician.update(physician_params)
-        redirect_to physician_path(@physician)
+      if @current_physician
+        if @current_physician == @physician
+          if @physician.update(physician_params)
+            redirect_to physician_path(@physician)
+          else
+            flash[:notice] = "Error updating Info! Plz make sure all fileds are filled out."
+            render 'physicians/new'
+          end
+        else
+          flash[:notice] = "You cannot edit another Physician's Info"
+        end
       else
-        flash[:notice] = "Error updating Info! Plz make sure all fileds are filled out."
-        render 'physicians/new'
+        flash[:notice] = "You have to be a Physician to edit a Physician's Info "
       end
     end
 

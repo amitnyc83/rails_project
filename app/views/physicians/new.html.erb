@@ -1,7 +1,14 @@
 <h1>Physician Sign Up Page<h1>
 
-<%= render 'form' %>
+<%= form_for @physician do |f| %>
 
+<%= render :partial = 'form', locals: {physician: => @physician, f: => f} %>
+
+<%= f.label :password %>
+<%= f.password_field :password %>
+<br>
+<%= f.submit "Signup" %>
+<% end %>
 
 <p><%= link_to('Sign Up with Facebook!', '/auth/facebook') %></p>
 <%= link_to "Back", root_path, class:"btn btn-primary btn-light" %>

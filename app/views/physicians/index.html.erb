@@ -4,7 +4,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <td><%= physician.name %></td>
+    <td><%=link_to physician.name, physician_path(physician) %></td>
   </tr>
   <tr>
     <th>Specialty</th>
@@ -14,5 +14,6 @@
     <th>Email</th>
     <td><%= physician.specialty %></td>
   </tr>
-  <% end %>
   </table>
+  <br>
+  <% end %>
