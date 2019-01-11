@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
 
   def create
     if params[:session]
-      if params[:session][:email].present? && params[:session][:password].present?
-        @physician = Physician.find_by(email => params[:session][:email])
-        @patient = Patient.find_by(email => params[:session][:email])
+      if params[:session][:name].present? && params[:session][:password].present?
+        @physician = Physician.find_by(:name => params[:session][:name])
+        @patient = Patient.find_by(:name => params[:session][:name])
         if @physician && @physician.authenticate(params[:session][:paswword])
-          session[:physician_id] = @physician.id
+          login_physician(@physician)
           redirect_to physician_path(@physician)
         elsif @patient && @patient.authenticate(params[:session][:password])
-          session[:patient_id] = @patient.id
+          login_patient(@patient)
           redirect_to patient_path(@patient)
         else
           render :new
@@ -32,8 +32,8 @@ class SessionsController < ApplicationController
             u.email = auth['info']['email']
             u.image = auth['info']['image']
           end
-          session[:physician_id] = @physician.id
-          redirect_to physician_path(@physician)
+          login_physician(@physician)
+          redirect_to edit_physician_path(@physician)
         end
       end
 

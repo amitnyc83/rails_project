@@ -18,7 +18,17 @@ class PatientsController < ApplicationController
   end
 
   def show
-    @appointments = Appointment.where("patient_id = ?", @patient.id)
+   if @current_patient = @patient
+    @appointments = Appointment.where("patient_id = ?", @current_patient.id)
+   else
+     if @current_physician
+      redirect_to physician_path(@current_physician)
+     elsif @current_patient
+      redirect_to patient_path(@current_patient)
+     else
+      redirect_to root_path
+    end
+   end
   end
 
 
@@ -50,7 +60,7 @@ end
 
 
   def patient_params
-    params.require(:patient).permit(:name, :email, :password_digest, :age, :date_of_birth)
+    params.require(:patient).permit(:name, :email, :password, :age, :date_of_birth)
   end
 
 

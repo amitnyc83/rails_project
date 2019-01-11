@@ -5,7 +5,7 @@ class Patient < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true
-  validates :email, presence: true
-
-  has_secure_password 
+  validates :email, uniqueness: true
+  validates :password, presence: true
+  has_secure_password
 end

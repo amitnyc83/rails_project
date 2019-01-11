@@ -2,17 +2,17 @@
 
 <%= form_for(:session, url: sessions_create_path, method: :post) do |f| %>
 <%= f.label :name %>
-<%= f.text_field :name, class: 'form-control' %>
+<%= f.text_field :name %>
 <br>
 <%= f.label :password %>
-<%= f.password_field :password, class: 'form-control' %>
+<%= f.password_field :password %>
 <br>
-<%= f.submit "Sign In", class: "btn btn-primary" %>
+<%= f.submit "Sign In" %>
 <% end %>
 <br>
 <h3>New Physician? <%= link_to "Signup as a Physician!", new_physician_path %></h3><br>
 <h3>New Patient? <%= link_to "Signup as a Patient!", new_patient_path %></h3><br>
 <h2><p>If you are a Physician, You can <%= link_to('Log in with Facebook!', '/auth/facebook') %></p></h2>
-<h3><%= link_to "Back", root_path, class:"btn btn-primary btn-light" %></h3>
+<h3>Click to go <%= link_to "Back", root_path, class:"btn btn-primary btn-light" %> to Welcome page</h3>
 </div>
 </div>

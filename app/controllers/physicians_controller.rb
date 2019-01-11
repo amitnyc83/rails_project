@@ -1,4 +1,5 @@
 class PhysiciansController < ApplicationController
+  before_action :login_required, except: [:index, :show, :new, :create]
   before_action :find_physician, only: [:show, :edit, :update]
 
   def index
@@ -7,18 +8,30 @@ class PhysiciansController < ApplicationController
 
 
   def show
-    @appointments = Appointment.where("physician_id = ?", @physician.id)
+    if @current_physician
+      @appointments = Appointment.where("physician_id = ?", @current_physician.id)
+    else
+      @appointments = nil
+    end
   end
 
 
-  def new
-    @physician = Physician.new
-  end
+    def new
+      if @current_physician
+        flash[:notice] = "You are already a member of AppointmentMD"
+        redirect_to physician_path(@current_physician)
+      elsif @current_patient
+        flash[:notice] = "You cannot create a Physician account"
+        redirect_to patient_path(@current_patient)
+      end
+      @physician = Physician.new
+    end
 
 
-  def create
+    def create
       @physician = Physician.new(physician_params)
       if @physician.save
+        login_physician(@physician)
         flash[:notice] = "You have successfully created an account"
         redirect_to physician_path(@physician)
       else
@@ -29,7 +42,7 @@ class PhysiciansController < ApplicationController
 
     def edit
       if @current_physician
-        unless @current_physician = @physician
+        unless @current_physician == @physician
           redirect_to physician_path(@current_physician)
         end
       elsif @current_patient
@@ -44,6 +57,7 @@ class PhysiciansController < ApplicationController
       if @current_physician
         if @current_physician == @physician
           if @physician.update(physician_params)
+            flash[:notice] = "Your info was successfully updated"
             redirect_to physician_path(@physician)
           else
             flash[:notice] = "Error updating Info! Plz make sure all fileds are filled out."
@@ -67,8 +81,8 @@ class PhysiciansController < ApplicationController
 
 
     def physician_params
-      params.require(:physician).permit(:name, :email, :uid, :specialty, :email, :password_digest)
+      params.require(:physician).permit(:name, :email, :uid, :specialty, :email, :password)
     end
 
 
-end
+  end

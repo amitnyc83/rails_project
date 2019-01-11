@@ -14,6 +14,23 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def show
+    if current_patient
+      unless @current_patient = @appointment.patient
+        flash[:notice] = "Only the Physician and Patient can view this page"
+        redirect_to appointments_path
+      end
+    elsif
+      unless @current_physician = @appointment.patient
+        flash[:notice] = "Only the Physician and Patient can view this page"
+        redirect_to appointments_path
+      end
+    else
+      flash[:notice] = "You have to be logged in to view this page"
+      redirect_to root_path
+    end
+  end
+
 
 
   def new
@@ -29,11 +46,6 @@ class AppointmentsController < ApplicationController
   end
 
 
-  def show
-  end
-
-
-
 
 
   def create
@@ -46,20 +58,54 @@ class AppointmentsController < ApplicationController
       flash[:notice] = "There was an error creating this appointment"
       render 'appointments/new'
     end
+  else
+    flash[:notice] = "Only Physician's can create appointment"
+    redirect_to patient_path(@current_patient)
    end
   end
 
 
   def edit
+    if @current_physician
+      unless @current_physician = @appointment.physician
+        flash[:notice] = "You cannot edit this appointment"
+        redirect_to appointment_path(@appointment)
+      end
+    elsif @current_patient
+      unless @current_patient
+        flash[:notice] = "You cannot edit this appointment"
+        redirect_to appointments_path
+      end
+    end
   end
 
 
   def update
+    if @current_patient
+      if @current_patient = @appointment.patient
     if @appointment.update(appointment_params)
+      flash[:notice] = "Appointment was successfully updated"
       redirect_to @appointment
     else
+      flash[:notice] = "Appointment was not updated. There was asn Error."
       render edit_appointment_path(@appointment)
     end
+  else
+    flash[:notice] = "You cannot edit this appointment"
+    redirect_to appointments_path
+  end
+elsif @current_physician
+  if @current_physician = @appointment.patient
+    if @appointment.update(appointment_params)
+      flash[:notice] = "Appointment was successfully updated"
+      redirect_to @appointment
+    else
+      flash[:notice] = "Appointment was not updated. There was asn Error."
+      render edit_appointment_path(@appointment)
+    end
+  else
+    flash[:notice] = "You cannot edit this appointment"
+    redirect_to appointments_path
   end
 
 

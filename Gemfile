@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 
  gem 'thin'
 
+ gem 'pry'
+
  gem 'dotenv-rails'
 
 # Use ActiveStorage variant
