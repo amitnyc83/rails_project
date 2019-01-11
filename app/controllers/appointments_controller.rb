@@ -21,7 +21,7 @@ class AppointmentsController < ApplicationController
         redirect_to appointments_path
       end
     elsif
-      unless @current_physician = @appointment.patient
+      unless @current_physician = @appointment.physician
         flash[:notice] = "Only the Physician and Patient can view this page"
         redirect_to appointments_path
       end
