@@ -45,6 +45,16 @@ end
 
 
   def edit
+    if @current_patient
+      unless current_patient == @patient
+        redirect_to patient_path(@current_patient)
+      end
+    elsif @current_physician
+      unless current_physician == @physician
+        redirect_to physician_path(@current_physician)
+      else
+        redirect_to root_path
+    end
   end
 
 

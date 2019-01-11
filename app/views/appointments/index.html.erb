@@ -13,12 +13,12 @@
 
   <tr>
     <th>Physician Name</th>
-    <td><%= link_to appointment_physician.name, physician_path(appointment.physician) %></td>
+    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
   </tr>
 
   <tr>
     <th>Patient Name</th>
-    <td><%= link_to appointment_patient.name, patient_path(appointment.patient) %></td>
+    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
   </tr>
 </table>
 <% end %>
