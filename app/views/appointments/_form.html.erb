@@ -1,4 +1,3 @@
-<%= form_for (@appointment) do |f| %>
 <p>
 <%= f.label :date %><br>
 <%= f.date_field :date %>
@@ -18,8 +17,5 @@
 
 <p>
   <%= f.label :patient_id, "Patient" %><br>
-  <%= f.collection_select :patient_id, Patient.all, :id, :name, include_blank: "Select a patient" %>
+  <%= f.collection_select :patient_id, Patient.all.order('name ASC'), :id, :name, include_blank: "Select a patient" %>
 </p>
-
-<%= f.submit %>
-<% end %>

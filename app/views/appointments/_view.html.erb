@@ -41,4 +41,9 @@
     <th>Patient</th>
     <td><%= link_to appointmemt.patient.name, patient_path(appointment.patient) %></td>
   </tr>
-  <% end %> 
+  <% end %>
+  </table>
+
+  <% unless current_page?(appointment_path(appointment)) %>
+  <%= link_to "View Full Details of Appointment", appointment_path(appointment) %>
+  <% end %>
