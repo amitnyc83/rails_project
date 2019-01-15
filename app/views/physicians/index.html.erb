@@ -1,19 +1,9 @@
 <h1>All Physician in AppointmentMD </h1>
 
 <% @physicians.each do |physician| %>
-<table>
-  <tr>
-    <th>Name</th>
-    <td><%=link_to physician.name, physician_path(physician) %></td>
-  </tr>
-  <tr>
-    <th>Specialty</th>
-    <td<%= physician.specialty %></td>
-    </tr>
-  <tr>
-    <th>Email</th>
-    <td><%= physician.specialty %></td>
-  </tr>
-  </table>
-  <br>
-  <% end %>
+
+ <%= render :partial => "view", locals => {:physician => physician} %>
+
+<% end %>
+
+<%= link_to "Back", physicians_path, class:"btn btn-primary btn-light" %>

@@ -1,27 +1,21 @@
 <h1> Your Appointments</h1>
-<% if current_physician %>
+
+<% if @current_physician %>
 <%= link_to "Add a new appointment", new_appointment_path %>
 <% end %>
+
 <% @appointments.each do |appointment| %>
-<table>
-  <tr>
-    <th>Date</th>
-    <td><%= appointment.date %></td>
-  </tr>
 
-  <tr>
-    <th>Time</th>
-    <td><%= appointment.time %></td>
-  </tr>
+<%= render :partial => "view", :locals => {:appointment => @appointment} %>
 
-  <tr>
-    <th>Physician Name</th>
-    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
-  </tr>
+<% end %>
 
-  <tr>
-    <th>Patient Name</th>
-    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
-  </tr>
-</table>
+<%= if !@appointment.any? %>
+ <p>You currently dont have any appointments</p>
+<% end %>
+
+<% if current_physician %>
+<%= link_to "Back", physicians_path %>
+<% else %>
+<%= link_to "Back", patients_path %>
 <% end %>

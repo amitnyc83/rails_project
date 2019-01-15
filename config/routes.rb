@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'welcome/index'
-
 
   root 'welcome#index'
 
@@ -19,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/signin' => 'sessions#new'
   post '/sessions/create' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
+  delete '/logout' => 'sessions#destroy'
 
 
   get '/auth/facebook/callback' => 'sessions#create'

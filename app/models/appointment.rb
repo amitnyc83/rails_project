@@ -9,4 +9,6 @@ class Appointment < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true
 
+  scope :today, -> {where(date: Date.today)}
+
 end

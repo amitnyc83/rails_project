@@ -1,23 +1,11 @@
-<% if @physician = current_physician %>
+<% if @physician == current_physician %>
 <h1>Welcome to your HomePage</h1>
 <% else %>
 <h1>Physician View </h1>
 <% end %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <td><%= @physician.name %></td>
-  </tr>
-  <tr>
-    <th>Specialty</th>
-    <td><%= @physician.specialty %></td>
-  </tr>
-  <tr>
-    <th>Email</th>
-    <td><%= @physician.email %></td>
-  </tr>
-</table>
+<%= render :partial => "view", :locals => {:physician => @physician} %>
+
 
 
 <% if @physician == current_physician %>

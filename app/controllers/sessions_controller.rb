@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
             u.image = auth['info']['image']
           end
           login_physician(physician)
-          redirect_to physician_path(physician)
+          redirect_to edit_physician_path(physician)
         end
       end
 

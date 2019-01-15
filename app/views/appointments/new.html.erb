@@ -1,10 +1,10 @@
-<h1>Create a new Appointment</h1>
+<h1>Create a New Appointment</h1>
 
-<%= form_for (@appointment) do |f| %>
+<%= form_for @appointment do |f| %>
 
 <%= render :partial => 'form', :locals => { :appointment => @appointment, :f => f} %>
 
-<%= f.submit %>
+<%= f.submit "Book Appointment" %>
 <% end %>
 
 <%= link_to "Back", appointments_path %>
