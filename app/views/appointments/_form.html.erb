@@ -1,11 +1,11 @@
 <p>
 <%= f.label :date %><br>
-<%= f.date_field :date %>
+<%= f.date_field :date, value: appointment.date  %>
 </p>
 
 <p>
   <%= f.label :time %><br>
-  <%= f.time_field :time %>
+  <%= f.time_field :time, value: "%r", value: appointment.time %>
 </p>
 
 <p>

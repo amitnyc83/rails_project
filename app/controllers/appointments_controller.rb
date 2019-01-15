@@ -20,7 +20,7 @@ class AppointmentsController < ApplicationController
         flash[:notice] = "Only the Physician and Patient can view this page"
         redirect_to appointments_path
       end
-    elsif
+    elsif @current_physician
       unless @current_physician = @appointment.physician
         flash[:notice] = "Only the Physician and Patient can view this page"
         redirect_to appointments_path
@@ -69,10 +69,10 @@ class AppointmentsController < ApplicationController
     if @current_physician
       unless @current_physician = @appointment.physician
         flash[:notice] = "You cannot edit this appointment"
-        redirect_to appointment_path(@appointment)
+        redirect_to appointments_path(@appointment)
       end
     elsif @current_patient
-      unless @current_patient
+      unless @current_patient = @appointent.patient
         flash[:notice] = "You cannot edit this appointment"
         redirect_to appointments_path
       end
@@ -85,7 +85,7 @@ class AppointmentsController < ApplicationController
       if @current_patient = @appointment.patient
         if @appointment.update(appointment_params)
           flash[:notice] = "Appointment was successfully updated"
-          redirect_to @appointment
+          redirect_to appointment_path(@appointment)
         else
           flash[:notice] = "Appointment was not updated. There was asn Error."
           render edit_appointment_path(@appointment)
@@ -98,7 +98,7 @@ class AppointmentsController < ApplicationController
       if @current_physician = @appointment.patient
         if @appointment.update(appointment_params)
           flash[:notice] = "Appointment was successfully updated"
-          redirect_to @appointment
+          redirect_to appointment_path(@appointment)
         else
           flash[:notice] = "Appointment was not updated. There was asn Error."
           render edit_appointment_path(@appointment)

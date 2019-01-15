@@ -30,6 +30,14 @@ class PhysiciansController < ApplicationController
 
     def create
       @physician = Physician.new(physician_params)
+      if @current_physician
+        flash[:notice] = "You already have an account"
+        redirect_to physician_path(@current_physician)
+      elsif @current_patient
+        flash[:notice] = "You can't create a Physician account"
+        redirect_to patient_path(@current_patient)
+      end
+
       if @physician.save
         login_physician(@physician)
         flash[:notice] = "You have successfully created an account"

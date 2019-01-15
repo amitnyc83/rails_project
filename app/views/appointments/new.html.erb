@@ -2,7 +2,7 @@
 
 <%= form_for (@appointment) do |f| %>
 
-<%= render :partial => 'form', :locals => { :appointment => appointment, :f => f} %>
+<%= render :partial => 'form', :locals => { :appointment => @appointment, :f => f} %>
 
 <%= f.submit %>
 <% end %>

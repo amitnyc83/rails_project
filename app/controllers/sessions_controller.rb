@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       if params[:session][:email].present? && params[:session][:password].present?
         physician = Physician.find_by(:email => params[:session][:email])
         patient = Patient.find_by(:email => params[:session][:email])
-        if physician && physician.authenticate(params[:session][:paswword])
+        if physician && physician.authenticate(params[:session][:password])
           login_physician(physician)
           redirect_to physician_path(physician)
         elsif patient && patient.authenticate(params[:session][:password])
@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
             u.image = auth['info']['image']
           end
           login_physician(physician)
-          redirect_to edit_physician_path(physician)
+          redirect_to physician_path(physician)
         end
       end
 

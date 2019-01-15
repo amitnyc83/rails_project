@@ -1,6 +1,6 @@
 class PatientsController < ApplicationController
- before_action :login_required, except: [:new, :create]
- before_action :find_patient, only: [:show, :edit, :update]
+ # before_action :login_required, except: [:new, :create]
+ before_action :find_patient, except: [:new, :create]
 
 
   def index
@@ -37,6 +37,7 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
+
     if @current_patient
       flash[:notice] = "You have an account in AppointmentMD"
       redirect_to patient_path(@current_patient)
