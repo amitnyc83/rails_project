@@ -87,6 +87,8 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.10.0)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.7)
@@ -187,6 +189,10 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    slug (4.1.0)
+      activerecord (> 3.0.0)
+      activesupport (> 3.0.0)
+      rake
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -236,6 +242,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   dotenv-rails
+  friendly_id
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   omniauth
@@ -245,6 +252,7 @@ DEPENDENCIES
   rails (~> 5.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
+  slug
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3

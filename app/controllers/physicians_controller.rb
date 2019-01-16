@@ -84,7 +84,7 @@ class PhysiciansController < ApplicationController
     private
 
     def find_physician
-      @physician = Physician.find(params[:id])
+      @physician = Physician.friendly.find(params[:id])
     end
 
 

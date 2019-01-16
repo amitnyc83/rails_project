@@ -1,11 +1,6 @@
 class PatientsController < ApplicationController
- # before_action :login_required, except: [:new, :create]
- # before_action :find_patient, except: [:new, :create]
-
-
-  def index
-    @patients = Patient.all
-  end
+before_action :login_required, except: [:new, :create]
+before_action :find_patient, except: [:new, :create]
 
 
   def show
@@ -92,7 +87,7 @@ end
   private
 
   def find_patient
-    @patient = Patient.find(params[:id])
+    @patient = Patient.friendly.find(params[:id])
   end
 
 

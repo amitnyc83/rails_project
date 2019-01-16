@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_patient
 
 
+
 def login_physician(physician)
   session[:physician_id] = physician.id
 end
@@ -17,7 +18,6 @@ end
 
 def login_required
   if !logged_in?
-    flash[:notice] = "You have to Sign In to view this page."
     redirect_to signin_path
   end
 end

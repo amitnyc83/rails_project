@@ -2,8 +2,8 @@
 
 <% @physicians.each do |physician| %>
 
- <%= render :partial => "view", locals => {:physician => physician} %>
+ <%= render :partial => "view", :locals => {:physician => physician} %>
+
+<%= link_to "View Full Details", physician_path(physician), class:"btn btn-primary btn-light" %>
 
 <% end %>
-
-<%= link_to "Back", physicians_path, class:"btn btn-primary btn-light" %>

@@ -25,8 +25,9 @@
 
 
 <% if @patient.appointments %>
-<%= link_to "View your appointments", patient_appointments_path(@patient) %>
+<%= link_to "View appointments", patient_appointments_path(@patient) %>
 <% end %>
+<br>
 <% if @patient == @current_patient %>
 <%= link_to "Edit Your Info", edit_patient_path %>
 <% end %>
