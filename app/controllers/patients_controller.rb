@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-before_action :login_required, except: [:new, :create]
+before_action :login_required, except: [:index, :show, :new, :create]
 before_action :find_patient, except: [:new, :create]
 
 

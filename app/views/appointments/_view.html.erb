@@ -2,48 +2,48 @@
 
   <tr>
     <th>Date</th>
-    <td><%= appointment.date %></td>
+    <td><%= a.date %></td>
   </tr>
 
   <tr>
     <th>Time</th>
-    <td><%= appointment.time %></td>
+    <td><%= a.time %></td>
   </tr>
 
 
-<% if current_page?(appointment_path(appointment)) %>
+<% if current_page?(appointment_path(a)) %>
   <tr>
     <th>Patient</th>
-    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
+    <td><%= link_to a.patient.name, patient_path(a.patient) %></td>
   </tr>
 
   <tr>
     <th>Physician</th>
-    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
+    <td><%= link_to a.physician.name, physician_path(a.physician) %></td>
   </tr>
-  <% elsif current_page?(physician_path(appointment.physician)) %>
+  <% elsif current_page?(physician_path(a.physician)) %>
   <tr>
     <th>Patient</th>
-    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
+    <td><%= link_to a.patient.name, patient_path(a.patient) %></td>
   </tr>
-  <% elsif current_page?(patient_path(appointment.patient)) %>
+  <% elsif current_page?(patient_path(a.patient)) %>
   <tr>
     <th>Physician</th>
-    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
+    <td><%= link_to a.physician.name, physician_path(a.physician) %></td>
   </tr>
   <% else %>
   <tr>
     <th>Physician</th>
-    <td><%= link_to appointment.physician.name, physician_path(appointment.physician) %></td>
+    <td><%= link_to a.physician.name, physician_path(a.physician) %></td>
   </tr>
 
   <tr>
     <th>Patient</th>
-    <td><%= link_to appointment.patient.name, patient_path(appointment.patient) %></td>
+    <td><%= link_to a.patient.name, patient_path(a.patient) %></td>
   </tr>
   <% end %>
   </table>
 
-  <% unless current_page?(appointment_path(appointment)) %>
-  <%= link_to "View Full Details of Appointment", appointment_path(appointment) %>
+  <% unless current_page?(appointment_path(a)) %>
+  <%= link_to "View Full Details of Appointment", appointment_path(a) %>
   <% end %>
