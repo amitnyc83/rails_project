@@ -37,9 +37,8 @@ gem 'jbuilder', '~> 2.5'
 
  gem 'dotenv-rails'
 
- gem 'slug'
 
-gem 'friendly_id'
+ gem 'friendly_id', '~> 5.2.4'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

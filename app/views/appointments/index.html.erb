@@ -4,18 +4,12 @@
 <%= link_to "Add a new appointment", new_appointment_path %>
 <% end %>
 
-<% @appointments.each do |a| %>
+<% @appointments.each do |appointment| %>
 
-<%= render :partial => "view", :locals => {:a => a} %>
+<%= render :partial => "view", :locals => {:appointment => appointment} %>
 
 <% end %>
 
 <% if !@appointments.any? %>
  <p>You currently don't have any appointments</p>
-<% end %>
-
-<% if current_physician %>
-<%= link_to "Back", physicians_path %>
-<% else %>
-<%= link_to "Back", patients_path %>
 <% end %>

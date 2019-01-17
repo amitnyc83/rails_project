@@ -9,7 +9,7 @@ class PhysiciansController < ApplicationController
 
   def show
     if @current_physician
-      @appointments = Appointment.where("physician_id = ?", @current_physician.id)
+      @appointments = Appointment.upcoming.where("physician_id = ?", @current_physician.id)
     else
       @appointments = nil
     end

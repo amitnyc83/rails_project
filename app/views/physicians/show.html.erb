@@ -13,7 +13,7 @@
 <p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"btn btn-primary btn-light"  %></p>
 <p><%= link_to "Edit Your Personal Info", edit_physician_path, class:"btn btn-primary btn-light"  %></p>
 <% end %>
-<% if @physician == current_physician && @appointments.any? %>
+<% if @physician == current_physician && !@appointments.nil? %>
 <h2>Your Upcoming Appointments</h2>
 <% @appointments.each do |appointment| %>
 <%= render :partial => "appointments/view", :locals => {:appointment => appointment} %>
