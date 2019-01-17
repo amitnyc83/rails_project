@@ -9,6 +9,6 @@ class Appointment < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true
 
-  scope :today, -> {where(date: Date.today)}
+  scope :upcoming, -> {where("date >= ? AND date <= ?", Date.today, Date.today+2.week)}
 
 end

@@ -7,8 +7,10 @@
     <th>Specialty</th>
     <td><%= physician.specialty %></td>
   </tr>
+  <% if current_page?(physician_path(physician)) %>
   <tr>
     <th>Email</th>
-    <td><%= physician.email %>
-  </td>
+    <td><%= physician.email %></td>
+  </tr>
+  <% end %>
 </table>

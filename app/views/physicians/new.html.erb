@@ -5,7 +5,7 @@
 <%= render :partial => "form", :locals => { :physician => @physician, :f => f} %>
 
 <%= f.label :password %>
-<%= f.text_field :password %>
+<%= f.password_field :password %>
 <br>
 <%= f.submit "Signup" %>
 <% end %>

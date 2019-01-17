@@ -1,10 +1,10 @@
 <h1>Edit Physician Info<h1>
   <%= form_for @physician do |f| %>
 
-  <%= render :partial => 'form', locals: {physician: @physician, f: f} %>
+  <%= render :partial => 'form', :locals => {:physician => @physician, :f =>  f} %>
 
   <%= f.submit "Update Physician Info" %>
   <% end %>
 
-  <%= link_to "Show", @physician %>
-  <%= link_to "Back", physicians_path, class:"btn btn-primary btn-light" %>
+  <p><%= link_to "Show", @physician %></p>
+  <p><%= link_to "Back", physicians_path, class:"btn btn-primary btn-light" %></p>
