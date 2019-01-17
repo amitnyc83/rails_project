@@ -86,15 +86,15 @@ end
 
   private
 
-  def find_patient
-    @patient = Patient.friendly.find(params[:id])
-  end
-
 
   def patient_params
     params.require(:patient).permit(:name, :email, :password, :age, :date_of_birth)
   end
 
+
+  def find_patient
+    @patient = Patient.friendly.find(params[:id])
+  end
 
 
 end

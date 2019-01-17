@@ -30,6 +30,7 @@ class PhysiciansController < ApplicationController
 
     def create
       @physician = Physician.new(physician_params)
+
       if @current_physician
         flash[:notice] = "You already have an account"
         redirect_to physician_path(@current_physician)
@@ -83,13 +84,13 @@ class PhysiciansController < ApplicationController
 
     private
 
-    def find_physician
-      @physician = Physician.friendly.find(params[:id])
-    end
-
 
     def physician_params
       params.require(:physician).permit(:name, :email, :uid, :specialty, :email, :password)
+    end
+
+    def find_physician
+      @physician = Physician.friendly.find(params[:id])
     end
 
 
