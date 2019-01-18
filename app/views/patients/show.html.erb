@@ -31,3 +31,11 @@
 <% if @patient == @current_patient %>
 <%= link_to "Edit Your Info", edit_patient_path %>
 <% end %>
+<% if @patient = @current_patient && Appointment.upcoming.where("patient_id = ?", @patient.id).any? %>
+<h2>Your Upcoming Appointments in the next 2 Weeks</h2>
+<%= @appointments.each do |a| %>
+<%= render :partial => "appointments/view", :locals => {:a => a} %>
+<% end %>
+<% elsif @patient == current_patient %>
+<h2>You have No Upcoming Appointments in the next 2 Weeks</h2>
+<% end %>
