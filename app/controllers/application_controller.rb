@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   def login_physician(physician)
-    session[:physician_id] = @physician.id
+    session[:physician_id] = physician.id
   end
 
   def login_patient(patient)
-    session[:patient_id] = @patient.id
+    session[:patient_id] = patient.id
   end
 
   def current_physician
