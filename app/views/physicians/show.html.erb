@@ -16,8 +16,8 @@
 
 <% if @physician == current_physician && !@appointments.nil? %>
 <h2>Your Upcoming Appointments</h2>
-<% @appointments.each do |appointment| %>
-<%= render :partial => "appointments/view", :locals => {:appointment => appointment} %>
+<% @appointments.each do |a| %>
+<%= render :partial => "appointments/view", :locals => {:a => a} %>
 <% end %>
 
 <% elsif @physician == current_physician %>

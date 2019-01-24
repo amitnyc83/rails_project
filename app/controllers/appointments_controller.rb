@@ -5,9 +5,9 @@ class AppointmentsController < ApplicationController
 
   def index
     if @current_patient
-      @appointments = Appointment.where("patient_id", @current_patient.id)
+      @appointments = @current_patient.appointments
     elsif @current_physician
-      @appointments = Appointment.where("physician_id", @current_physician.id)
+      @appointments = @current_physician.appointments
     else
       flash[:notice] = "You need to log in to view this page"
       redirect_to root_path

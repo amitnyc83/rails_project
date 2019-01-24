@@ -4,9 +4,9 @@
 <%= link_to "Add a new appointment", new_appointment_path %>
 <% end %>
 
-<% @appointments.each do |appointment| %>
+<% @appointments.each do |a| %>
 
-<%= render :partial => "view", :locals => {:appointment => appointment} %>
+<%= render :partial => "view", :locals => {:a => a} %>
 
 <% end %>
 
