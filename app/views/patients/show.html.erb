@@ -40,7 +40,7 @@
 
 <% if @patient == @current_patient && Appointment.upcoming.where("patient_id = ?", @patient.id).any? %>
 
-<h2>Appointments In The Next 7 Days</h2>
+<h2>Appointments In The Next 2 Weeks</h2>
 
 <% @appointments.each do |a| %>
 
@@ -49,5 +49,5 @@
 <% end %>
 
 <% elsif @patient == current_patient %>
-<h2>You Have No Appointments This Week</h2>
+<h2>You Have No Appointments Coming Up</h2>
 <% end %>
