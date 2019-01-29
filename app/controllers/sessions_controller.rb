@@ -31,9 +31,10 @@ class SessionsController < ApplicationController
             u.name = auth['info']['name']
             u.email = auth['info']['email']
             u.image = auth['info']['image']
+            u.password = SecureRandom.hex(6)
           end
           login_physician(physician)
-          redirect_to edit_physician_path(physician)
+          redirect_to physician_path(physician)
         end
       end
 
