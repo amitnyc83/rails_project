@@ -3,10 +3,20 @@
 <%= f.date_field :date, value: appointment.date  %>
 </p>
 
+<% if appointment.errors[:date].any? %>
+<p><%= appointment.errors.full_messages_for(:date)[0] %></p>
+<br>
+<% end %>
+
 <p>
   <%= f.label :time %><br>
   <%= f.time_field :time, value: "%r%I:%M:%S %p", value: appointment.time %>
 </p>
+
+<% if appointment.errors[:time].any? %>
+<p><%= appointment.errors.full_messages_for(:time)[0] %></p>
+<br>
+<% end %>
 
 <p>
   <%= f.label :physician_id, "Physician" %><br>
@@ -19,3 +29,8 @@
   <%= f.label :patient_id, "Patient" %><br>
   <%= f.collection_select :patient_id, Patient.all.order('name ASC'), :id, :name, include_blank: "Select a patient" %>
 </p>
+
+<% if appointment.errors[:patient_id].any? %>
+<p><%= appointment.errors.full_messages_for(:patient_id)[0] %></p>
+<br>
+<% end %>

@@ -1,9 +1,23 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
+  <% if physician.errors[:name].any? %>
+  <p><%= physician.errors.full_messages_for(:name)[0] %></p>
+  <br>
+  <% end %>
+
   <%= f.label :email %>
   <%= f.email_field :email %>
   <br>
+  <% if physician.errors[:email].any? %>
+  <p><%= physician.errors.full_messages_for(:email)[0]%></p>
+  <br>
+  <% end %>
+
   <%= f.label :specialty %>
   <%= f.text_field :specialty %>
   <br>
+  <% if physician.errors[:specialty].any? %>
+  <p><%= physician.errors.full_messages_for(:specialty)[0]%></p>
+  <br>
+  <% end %>
