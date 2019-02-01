@@ -4,8 +4,8 @@ before_action :find_patient, except: [:new, :create]
 
 
   def show
-   if @current_patient = @patient
-    @appointments = Appointment.upcoming.where("patient_id = ?", @current_patient.id)
+  if @current_patient == @patient
+   #  @appointments = Appointment.upcoming.where("patient_id = ?", @current_patient.id)
    else
      if @current_physician
       redirect_to physician_path(@current_physician)
@@ -15,7 +15,7 @@ before_action :find_patient, except: [:new, :create]
       redirect_to root_path
     end
    end
-  end
+ end
 
 
   def new

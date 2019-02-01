@@ -4,24 +4,24 @@ class AppointmentsController < ApplicationController
 
 
   def index
-    if @current_patient
+    if @current_patient == Patient.friendly.find(params[:patient_id])
       @appointments = @current_patient.appointments
     elsif @current_physician
       @appointments = @current_physician.appointments
     else
-      flash[:notice] = "You need to log in to view this page"
+      flash[:notice] = "You are not allowed to view this page! "
       redirect_to root_path
     end
   end
 
   def show
     if @current_patient
-      unless @current_patient = @appointment.patient
+      unless @current_patient == @appointment.patient
         flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         redirect_to appointments_path
       end
     elsif @current_physician
-      unless @current_physician = @appointment.physician
+      unless @current_physician == @appointment.physician
         flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         redirect_to appointments_path
       end
@@ -67,12 +67,12 @@ class AppointmentsController < ApplicationController
 
   def edit
     if @current_physician
-      unless @current_physician = @appointment.physician
+      unless @current_physician == @appointment.physician
         flash[:notice] = "You cannot edit this appointment"
         redirect_to appointments_path(@appointment)
       end
     elsif @current_patient
-      unless @current_patient = @appointment.patient
+      unless @current_patient == @appointment.patient
         flash[:notice] = "You cannot edit this appointment"
         redirect_to appointments_path
       end
@@ -82,7 +82,7 @@ class AppointmentsController < ApplicationController
 
   def update
     if @current_patient
-      if @current_patient = @appointment.patient
+      if @current_patient == @appointment.patient
         if @appointment.update(appointment_params)
           flash[:notice] = "Appointment was successfully updated"
           redirect_to appointment_path(@appointment)
@@ -95,7 +95,7 @@ class AppointmentsController < ApplicationController
         redirect_to appointments_path
       end
     elsif @current_physician
-      if @current_physician = @appointment.physician
+      if @current_physician == @appointment.physician
         if @appointment.update(appointment_params)
           flash[:notice] = "Appointment was successfully updated"
           redirect_to appointment_path(@appointment)

@@ -34,11 +34,11 @@
 
 
 
-<% if @patient == @current_patient && Appointment.upcoming.where("patient_id = ?", @patient.id).any? %>
+<% if @patient == @current_patient && @patient.appointments.upcoming.any? %>
 
 <h2>Appointments In The Next 2 Weeks</h2>
 
-<% @appointments.each do |a| %>
+<% @patient.appointments.upcoming.each do |a| %>
 
 <%= render :partial => "appointments/view", :locals => { :a => a} %>
 
