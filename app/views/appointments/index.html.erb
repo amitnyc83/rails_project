@@ -1,7 +1,7 @@
 <h1>Appointments in AppointmentMD</h1>
 
 <% if @current_physician %>
-<%= link_to "Add a new appointment", new_appointment_path %>
+<%= link_to "Add a new appointment", new_physician_appointment_path(@current_physician) %>
 <% end %>
 
 <% @appointments.each do |a| %>

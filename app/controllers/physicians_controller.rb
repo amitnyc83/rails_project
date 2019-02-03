@@ -1,5 +1,5 @@
 class PhysiciansController < ApplicationController
-  before_action :login_required, except: [:index, :show, :new, :create]
+  before_action :login_required, except: [:new, :show, :index, :create]
   before_action :find_physician, only: [:show, :edit, :update]
 
   def index
@@ -90,7 +90,7 @@ class PhysiciansController < ApplicationController
     end
 
     def find_physician
-      @physician = Physician.friendly.find(params[:id])
+       @physician = Physician.friendly.find(params[:id])
     end
 
 

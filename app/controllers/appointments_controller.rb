@@ -40,12 +40,17 @@ class AppointmentsController < ApplicationController
       if @current_patient
         flash[:notice] = "You must be a Physician to create an appointment"
         redirect_to patient_path(@current_patient)
-      elsif @current_physician && Physician.friendly.find(params[:physician_id])
-        unless @current_physician == Physician.friendly.find(params[:physician_id])
-          redirect_to new_physician_appointment_path(@current_physician)
-        else
-          flash[:notice] = "Please sign in as a physician to create an appointment."
-          redirect_to root_path
+      elsif @current_physician
+        if Physician.friendly.exists?(params[:physician_id])
+          unless @current_physician == Physician.friendly.find(params[:physician_id])
+            redirect_to new_physician_appointment_path(@current_physician)
+          end
+        elsif @current_physician
+          flash[:notice] = "That physician does not exist."
+          redirect_to physician_path(@current_physician)
+          else
+            flash[:notice] = "Please sign in as a physician to create an appointment."
+            redirect_to root_path
         end
       end
     end

@@ -20,9 +20,13 @@
 
 <p>
   <%= f.label :physician_id, "Physician" %><br>
-  <%= current_physician.name %>
-  <%= f.hidden_field :physician_id, :value => current_physician.id %>
+  <%= f.collection_select :physician_id, Physician.all.order('name ASC'), :id, :name, include_blank: "Select a physician" %>
 </p>
+
+<% if appointment.errors[:physician_id].any? %>
+<p><%= appointment.errors.full_messages_for(:physician_id)[0] %></p>
+<br>
+<% end %>
 
 
 <p>
