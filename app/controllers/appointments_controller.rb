@@ -3,8 +3,9 @@ class AppointmentsController < ApplicationController
   before_action :find_appointment, except: [:index, :new, :create]
 
 
+
   def index
-    if @current_patient == Patient.friendly.find(params[:patient_id])
+    if @current_patient
       @appointments = @current_patient.appointments
     elsif @current_physician
       @appointments = @current_physician.appointments
@@ -35,15 +36,31 @@ class AppointmentsController < ApplicationController
 
   def new
     @appointment = Appointment.new
-    unless logged_in? && @current_physician
-      flash[:notice] = "You must be a Physician to create an appointment"
-      if !logged_in?
-        redirect_to root_path
-      else
+    if logged_in?
+      if @current_patient
+        flash[:notice] = "You must be a Physician to create an appointment"
         redirect_to patient_path(@current_patient)
+      elsif @current_physician && Physician.friendly.find(params[:physician_id])
+        unless @current_physician == Physician.friendly.find(params[:physician_id])
+          redirect_to new_physician_appointment_path(@current_physician)
+        else
+          flash[:notice] = "Please sign in as a physician to create an appointment."
+          redirect_to root_path
+        end
       end
     end
   end
+
+
+  #   unless logged_in? && @current_physician
+  #     flash[:notice] = "You must be a Physician to create an appointment"
+  #     if !logged_in?
+  #       redirect_to root_path
+  #     else
+  #       redirect_to patient_path(@current_patient)
+  #     end
+  #   end
+  # end
 
 
 
@@ -87,7 +104,7 @@ class AppointmentsController < ApplicationController
           flash[:notice] = "Appointment was successfully updated"
           redirect_to appointment_path(@appointment)
         else
-          flash[:notice] = "Appointment was not updated. There was asn Error."
+          flash[:notice] = "Appointment was not updated. There was an Error."
           render edit_appointment_path(@appointment)
         end
       else
@@ -121,4 +138,4 @@ class AppointmentsController < ApplicationController
         @appointment = Appointment.find(params[:id])
       end
 
-    end
+end
