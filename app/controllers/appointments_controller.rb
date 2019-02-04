@@ -10,20 +10,20 @@ class AppointmentsController < ApplicationController
     elsif @current_physician
       @appointments = @current_physician.appointments
     else
-      flash[:notice] = "You are not allowed to view this page! "
+      flash[:notice] = "You are not allowed to view this page! Please log in!"
       redirect_to root_path
     end
   end
 
   def show
     if @current_patient
-      unless @current_patient == @appointment.patient
+      if @current_patient != @appointment.patient
         flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         redirect_to appointments_path
       end
     elsif @current_physician
-      unless @current_physician == @appointment.physician
-        flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
+      if @current_physician != @appointment.physician
+      flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         redirect_to appointments_path
       end
     else
@@ -41,32 +41,22 @@ class AppointmentsController < ApplicationController
         flash[:notice] = "You must be a Physician to create an appointment"
         redirect_to patient_path(@current_patient)
       elsif @current_physician
-        if Physician.friendly.exists?(params[:physician_id])
-          unless @current_physician == Physician.friendly.find(params[:physician_id])
+        if Physician.exists?(params[:physician_id])
+          unless @current_physician == Physician.find(params[:physician_id])
             redirect_to new_physician_appointment_path(@current_physician)
           end
         elsif @current_physician
-          flash[:notice] = "That physician does not exist."
+          flash[:notice] = "Only the physicina logged in can create an appointment."
           redirect_to physician_path(@current_physician)
           else
             flash[:notice] = "Please sign in as a physician to create an appointment."
             redirect_to root_path
         end
       end
+    else
+      redirect_to root_path
     end
   end
-
-
-  #   unless logged_in? && @current_physician
-  #     flash[:notice] = "You must be a Physician to create an appointment"
-  #     if !logged_in?
-  #       redirect_to root_path
-  #     else
-  #       redirect_to patient_path(@current_patient)
-  #     end
-  #   end
-  # end
-
 
 
 

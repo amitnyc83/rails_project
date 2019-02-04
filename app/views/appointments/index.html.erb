@@ -1,4 +1,7 @@
 <h1>Appointments in AppointmentMD</h1>
+<% if flash[:notice] %>
+ <div class="notice"><% flash[:notice] %></div>
+ <% end %>
 
 <% if @current_physician %>
 <%= link_to "Add a new appointment", new_physician_appointment_path(@current_physician) %>

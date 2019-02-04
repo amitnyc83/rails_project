@@ -12,6 +12,9 @@
   <body>
     <%= yield %>
   </body>
+  <% flash.each do |name, message| %>
+  <p><i><%= "#{name}: #{message}" %></i></p>
+  <% end %>
   <h4>Click to Log Out From AppointmentMD</h4>
   <h3>
     <p>

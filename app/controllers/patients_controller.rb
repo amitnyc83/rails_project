@@ -91,7 +91,7 @@ end
 
 
   def find_patient
-    @patient = Patient.friendly.find(params[:id])
+    @patient = Patient.find(params[:id])
   end
 
 
