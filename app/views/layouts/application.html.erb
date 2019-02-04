@@ -15,6 +15,7 @@
   <% flash.each do |name, message| %>
   <p><i><%= "#{name}: #{message}" %></i></p>
   <% end %>
+  <% if logged_in? %>
   <h4>Click to Log Out From AppointmentMD</h4>
   <h3>
     <p>
@@ -22,4 +23,5 @@
     </p>
     <br>
   </h3>
+  <% end %>
 </html>
