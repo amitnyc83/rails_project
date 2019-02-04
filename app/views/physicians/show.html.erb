@@ -9,7 +9,7 @@
 
 
 <% if @physician == current_physician %>
-<p><%= link_to "View Appointments", physician_appointments_path(@physician), class:"btn btn-primary btn-light"  %></p>
+<p><%= link_to "View All Your Appointments", physician_appointments_path(@physician), class:"btn btn-primary btn-light"  %></p>
 <p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"btn btn-primary btn-light"  %></p>
 <p><%= link_to "Edit Your Personal Info", edit_physician_path, class:"btn btn-primary btn-light"  %></p>
 <% end %>

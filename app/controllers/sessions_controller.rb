@@ -34,7 +34,9 @@ class SessionsController < ApplicationController
             u.password = SecureRandom.hex(6)
           end
           login_physician(physician)
+          if physician.specialty.nil?
           flash[:notice] = "Please use the edit page to add the Specialty to your profile"
+          end 
           redirect_to physician_path(physician)
         end
       end

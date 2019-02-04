@@ -17,12 +17,12 @@ class AppointmentsController < ApplicationController
 
   def show
     if @current_patient
-      if @current_patient != @appointment.patient
+      unless @current_patient == @appointment.patient
         flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         redirect_to appointments_path
       end
     elsif @current_physician
-      if @current_physician != @appointment.physician
+      unless @current_physician == @appointment.physician
       flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         redirect_to appointments_path
       end
@@ -46,7 +46,7 @@ class AppointmentsController < ApplicationController
             redirect_to new_physician_appointment_path(@current_physician)
           end
         elsif @current_physician
-          flash[:notice] = "Only the physicina logged in can create an appointment."
+          flash[:notice] = "Only the physician logged in can create an appointment."
           redirect_to physician_path(@current_physician)
           else
             flash[:notice] = "Please sign in as a physician to create an appointment."
