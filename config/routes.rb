@@ -10,9 +10,16 @@ Rails.application.routes.draw do
     resources :appointments, except: [:new, :create, :edit, :update]
   end
 
+
+  get '/physicians/surgeons' => 'physicians#surgeons'
+
+
   resources :physicians do
     resources :appointments
   end
+
+
+
 
 
   get '/signin' => 'sessions#new'

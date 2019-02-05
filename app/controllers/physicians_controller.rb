@@ -80,6 +80,11 @@ class PhysiciansController < ApplicationController
       end
     end
 
+    def surgeons
+      @physicians = Physician.type_of_Specialty
+      render 'physicians/index'
+    end
+
 
 
     private

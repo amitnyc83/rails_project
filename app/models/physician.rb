@@ -13,6 +13,8 @@ class Physician < ApplicationRecord
 
   has_secure_password
 
+  scope :type_of_Specialty, -> {where("specialty = ?", "Surgeon")}
+
 
 
 end

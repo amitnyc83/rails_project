@@ -5,9 +5,9 @@ class AppointmentsController < ApplicationController
 
 
   def index
-    if @current_patient
+    if @current_patient == Patient.find(params[:patient_id])
       @appointments = @current_patient.appointments
-    elsif @current_physician
+    elsif @current_physician == Physician.find(params[:physician_id])
       @appointments = @current_physician.appointments
     else
       flash[:notice] = "You are not allowed to view this page! Please log in!"
