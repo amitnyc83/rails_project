@@ -25,7 +25,7 @@ class PhysiciansController < ApplicationController
       if @current_physician
         flash[:notice] = "You are already a member of AppointmentMD"
         redirect_to physician_path(@current_physician)
-      elsif @current_patient
+       elsif @current_patient
         flash[:notice] = "You cannot create a Physician account"
         redirect_to patient_path(@current_patient)
       end
