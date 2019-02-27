@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 
  gem 'dotenv-rails'
 
+ gem 'jquery-rails'
 
  gem 'friendly_id', '~> 5.2.4'
 
