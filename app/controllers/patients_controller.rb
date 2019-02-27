@@ -3,19 +3,23 @@ before_action :login_required, except: [:new, :create]
 before_action :find_patient, except: [:new, :create]
 
 
-  def show
-  if @current_patient == @patient
-    @appointment = @current_patient.appointments.upcoming
-  else
-    if @current_physician
-      redirect_to physician_path(@current_physician)
-     elsif @current_patient
-      redirect_to patient_path(@current_patient)
-     else
-      redirect_to root_path
-    end
+ def show
+   if @current_patient == @patient
+     @appontment = @current_patient.appointments.upcoming
+   respond_to do |format|
+     format.html {render :show}
+     format.json {render json: @patient}
+   end
+ else
+   if @current_physician
+     redirect_to physician_path(@current_physician)
+   elsif @current_patient
+     redirect_to patient_path(@current_patient)
+   else
+     redirect_to root_path
    end
  end
+end
 
 
   def new
