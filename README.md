@@ -1,28 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 AppointmentMD is a Ruby on Rail with Javascript Flatiron Web Development project that allows Physicians and Patient to create and view appointments.
 Includes:
  1) At least one has_many relationship(Physicians and Patients has many  appointments)
