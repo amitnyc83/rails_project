@@ -33,3 +33,26 @@
      this.specialty = obj.specialty
     }
   }
+
+
+  let physicians = [];
+  let idList = [];
+
+
+  $(function() {
+    $.getJSON ('/physicians.json')success(function(data){
+      for (let i = 0; i , data.length; i++){
+        let p = new Physician(
+          data[i].id,
+          data[i].name,
+          data[i]
+        )
+      }
+    }
+  })
+
+
+  function nextPhysician(){
+    let currentId = $('table').data('id');
+    let currentPhysician = physician
+  }
