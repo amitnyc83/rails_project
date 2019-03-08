@@ -2,57 +2,17 @@
  // All this logic will automatically be available in application.js.
  // You can use CoffeeScript in this file: http://coffeescript.org/
 
+// document ready, listeners called
+$(() => {
+  console.log('physicians.js is loaded and its listening for a click now')
+  listenForClick();
+});
 
- $(document).ready(function(){
-   attachListeners()
+
+
+function listenForClick(){
+  $('a.physician-data').on('click', function(e){
+    e.preventDefault();
+    getPhysicians();
   })
-
-    function attachListeners(){
-      $('#previousPhysician').on('click',() => previousPhysician());
-      $('#nextPhysician').on('click',() => nextPhysician());
-    };
-
-    function previousPhysician(){
-      $.get('/physicians', (allPhysician) => {
-       if(allPhysician.data.length) {
-         allPhysician.data.forEach(physician => {
-           $('#physician').append(`<button id="physicianid-${physician.id}">Physician: ${physician.id}</button><br>`);
-           $(`#physicianid-${physician.id}`).on('click', () => getPhysician(physician.id));
-         })
-       }
-      })
-    }
-
-
-  class Physician {
-    constructor(obj) {
-     this.id  = obj.id
-     this.name = obj.name
-     this.slug = obj.slug
-     this.email = obj.email
-     this.specialty = obj.specialty
-    }
-  }
-
-
-  let physicians = [];
-  let idList = [];
-
-
-  $(function() {
-    $.getJSON ('/physicians.json')success(function(data){
-      for (let i = 0; i , data.length; i++){
-        let p = new Physician(
-          data[i].id,
-          data[i].name,
-          data[i]
-        )
-      }
-    }
-  })
-
-
-  function nextPhysician(){
-    let currentId = $('table').data('id');
-    let currentPhysician = physician
-  }
+}

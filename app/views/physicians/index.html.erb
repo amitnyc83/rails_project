@@ -4,7 +4,8 @@
 
  <%= render :partial => "view", :locals => {:physician => physician} %>
 
-<%= link_to "View Full Details", physician_path(physician), class:"btn btn-primary btn-light" %>
+<%= link_to "View Full Details", physician_path(physician), class:"physician-data" %>
+<div id="physician-appointments-html-area"></div><br></br>
 
 <% end %>
 <%= link_to "View Only Surgeons", '/physicians/surgeons' %>
