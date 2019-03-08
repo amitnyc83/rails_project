@@ -1,4 +1,6 @@
 class PhysicianSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :specialty
+  attributes :id, :name, :email, :specialty, :slug
+
   has_many :appointments
+  has_many :patients, through: :appointments
 end
