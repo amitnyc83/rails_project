@@ -3,20 +3,9 @@
 <%= form_for @appointment do |f| %>
 
 <%= render :partial => 'form', :locals => { :appointment => @appointment, :f => f} %>
-<div class="actions">
+
 <%= f.submit "Book Appointment" %>
-</div>
 <% end %>
 
-
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-    $('form').submit(function(event) {
-      //prevent form from submitting the default way
-      event.preventDefault();
-      alert("we r hack3rz");
-    });
-  });
-</script>
 
 <%= link_to "Back", appointments_path %>

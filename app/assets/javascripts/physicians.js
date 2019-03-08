@@ -6,6 +6,7 @@
 $(() => {
   console.log('physicians.js is loaded and its listening for a click now')
   listenForClick();
+  listenForNewAppointmentFormClick();
 });
 
 
@@ -13,24 +14,31 @@ $(() => {
 function listenForClick(){
   $('a.physician-data').on('click', function(e){
     e.preventDefault();
-    getPhysicians();
+    getPhysiciansData(this.href);
+  })
+}
+
+function listenForNewAppointmentFormClick(){
+  $('a.new-appointment-form').on('click', function(e){
+    e.preventDefault();
+    let newAppointmentForm = Physician.newAppointmentForm();
+    document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
   })
 }
 
 
 // function called from event listener : listenForClick()
-function getPhysicians(){
+function getPhysiciansData(url){
   $.ajax({
-    url: 'http://localhost:3000/physicians',
+    url: url,
     method: 'GET',
     dataType: 'json'
   }).done(function(data){
      console.log("the data is: ", data);
-      data.map(physician => {
-        const newPhysician = new Physician(physician)
+        const newPhysician = new Physician(data)
         const newPhysicianHTML = newPhysician.numOfAppointmentsHTML()
         document.getElementById("physician-appointments-html-area").innerHTML += newPhysicianHTML
-      })
+
   })
 }
 
@@ -43,6 +51,18 @@ class Physician{
     this.specialty = obj.specialty,
     this.slug = obj.slug,
     this.appointments =obj.appointments;
+  }
+  static newAppointmentForm(){
+    return (`
+      <strong>New Appointment Form</strong>
+      <form>
+      <input id='appointment-date' type='date' name='date'></input><br>
+      <input id='appointment-time' type='time' name='time'></input><br>
+      <input id='appointment-physician' type='physician.id' name='physician'></input><br>
+      <input id='appointment-patient' type='patient.id' name='patient'></input><br>
+      <input type='submit'/>
+      </form>
+       `)
   }
 }
 

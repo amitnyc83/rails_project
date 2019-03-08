@@ -9,9 +9,10 @@
 
 
 <% if @physician == current_physician %>
-<p><%= link_to "View All Your Appointments", physician_appointments_path(@physician), class:"btn btn-primary btn-light"  %></p>
-<p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"btn btn-primary btn-light"  %></p>
-<p><%= link_to "Edit Your Personal Info", edit_physician_path, class:"btn btn-primary btn-light"  %></p>
+<p><%= link_to "Edit Your Personal Info", edit_physician_path, class:"edit-physician-info"  %></p>
+<p><%= link_to "View All Your Appointments", physician_appointments_path(@physician), class:"all-appointments"  %></p>
+<p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"new-appointment-form"  %></p>
+<div id='new-appointment-form'></div>
 <% end %>
 
 <% if @physician == current_physician && !@appointments.nil? %>
