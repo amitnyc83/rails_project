@@ -16,3 +16,20 @@ function listenForClick(){
     getPhysicians();
   })
 }
+
+
+// function called from event listener : listenForClick()
+function getPhysicians(){
+  $.ajax({
+    url: 'http://localhost:3000/physicians',
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(data){
+     console.log("the data is: ", data);
+      data.map(physician => {
+        const newPhysician = new Physician(physician)
+        const newPhysicianHTML = newPhysician.numOfAppointmentsHTML()
+        document.getElementById("physician-appointments-html-area").innerHTML += newPhysicianHTML
+      })
+  })
+}
