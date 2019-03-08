@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
           login_physician(physician)
           if physician.specialty.nil?
           flash[:notice] = "Please use the edit page to add the Specialty to your profile"
-          end 
+          end
           redirect_to physician_path(physician)
         end
       end

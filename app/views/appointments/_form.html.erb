@@ -1,27 +1,37 @@
+<div class="field">
 <p>
 <%= f.label :date %><br>
 <%= f.date_field :date, value: appointment.date  %>
 </p>
+</div>
 
 <% if appointment.errors[:date].any? %>
 <p><%= appointment.errors.full_messages_for(:date)[0] %></p>
 <br>
 <% end %>
 
+
+
+<div class="field">
 <p>
   <%= f.label :time %><br>
   <%= f.time_field :time, value: "%r%I:%M:%S %p", value: appointment.time %>
 </p>
+</div>
 
 <% if appointment.errors[:time].any? %>
 <p><%= appointment.errors.full_messages_for(:time)[0] %></p>
 <br>
 <% end %>
 
+
+
+<div class="field">
 <p>
   <%= f.label :physician_id, "Physician" %><br>
   <%= f.collection_select :physician_id, Physician.all.order('name ASC'), :id, :name, {selected: @current_physician}  %>
 </p>
+</div>
 
 <% if appointment.errors[:physician_id].any? %>
 <p><%= appointment.errors.full_messages_for(:physician_id)[0] %></p>
@@ -29,10 +39,13 @@
 <% end %>
 
 
+
+<div class="field">
 <p>
   <%= f.label :patient_id, "Patient" %><br>
   <%= f.collection_select :patient_id, Patient.all.order('name ASC'), :id, :name, include_blank: "Select a patient" %>
 </p>
+</div>
 
 <% if appointment.errors[:patient_id].any? %>
 <p><%= appointment.errors.full_messages_for(:patient_id)[0] %></p>

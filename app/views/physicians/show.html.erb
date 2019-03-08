@@ -7,9 +7,6 @@
 <%= render :partial => "view", :locals => {:physician => @physician} %>
 
 
-<button id="previous-physician">Previous Physician</button>
-<button id="next-physician">Next Physician</button>
-
 
 <% if @physician == current_physician %>
 <p><%= link_to "View All Your Appointments", physician_appointments_path(@physician), class:"btn btn-primary btn-light"  %></p>
@@ -22,6 +19,8 @@
 <% @appointments.each do |a| %>
 <%= render :partial => "appointments/view", :locals => {:a => a} %>
 <% end %>
+
+
 
 <% elsif @physician == current_physician %>
 <h2>You have no upcoming appointments</h2>

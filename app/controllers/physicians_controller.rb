@@ -4,15 +4,15 @@ class PhysiciansController < ApplicationController
 
   def index
     @physicians = Physician.all
-    respond_to do |f|
-      f.html {render :index}
-      f.json {render :@physicians}
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @physicians}
     end
   end
 
 
   def show
-    if @current_physician == @physician
+    if @current_physician
       @appointments = Appointment.upcoming.where("physician_id = ?", @current_physician.id)
       respond_to do |format|
         format.html {render :show}
@@ -24,12 +24,11 @@ class PhysiciansController < ApplicationController
   end
 
 
-
     def new
       if @current_physician
         flash[:notice] = "You are already a member of AppointmentMD"
         redirect_to physician_path(@current_physician)
-       elsif @current_patient
+      elsif @current_patient
         flash[:notice] = "You cannot create a Physician account"
         redirect_to patient_path(@current_patient)
       end
@@ -39,6 +38,7 @@ class PhysiciansController < ApplicationController
 
     def create
       @physician = Physician.new(physician_params)
+
       if @current_physician
         flash[:notice] = "You already have an account"
         redirect_to physician_path(@current_physician)
@@ -46,17 +46,16 @@ class PhysiciansController < ApplicationController
         flash[:notice] = "You can't create a Physician account"
         redirect_to patient_path(patient)
       end
+
       if @physician.save
         login_physician(@physician)
-        flash[:notice] = "You have successfully created an account."
+        flash[:notice] = "You have successfully created an account"
         redirect_to physician_path(@physician)
       else
-        flash[:notice] =" There  was an error creating a new Physician"
+        flash[:notice] = "There was an error creating a new Physician"
         render 'physicians/new'
       end
     end
-
-
 
     def edit
       if @current_physician

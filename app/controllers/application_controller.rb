@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :current_physician
   helper_method :current_patient
   helper_method :current_physician
+  helper_method :patient_or_physician
   helper_method :logged_in?
 
   def login_physician(physician)
@@ -29,6 +30,15 @@ class ApplicationController < ActionController::Base
   def login_required
     if !logged_in?
       redirect_to signin_path
+    end
+  end
+
+
+  def patient_or_physician
+    if @current_physician
+      redirect_to physician_path(@current_physician)
+    elsif @current_patient
+      redirect_to patient_path(@current_patient)
     end
   end
 

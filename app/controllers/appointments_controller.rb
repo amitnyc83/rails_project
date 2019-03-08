@@ -5,7 +5,7 @@ class AppointmentsController < ApplicationController
 
 
   def index
-    if @current_patient == Patient.find(params[:patient_id])
+    if @current_patient
       @appointments = @current_patient.appointments
     elsif @current_physician == Physician.find(params[:physician_id])
       @appointments = @current_physician.appointments
@@ -19,12 +19,18 @@ class AppointmentsController < ApplicationController
     if @current_patient
       unless @current_patient == @appointment.patient
         flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
-        redirect_to appointments_path
+        respond_to do |format|
+          format.html {redirect_to appointments_path}
+          format.json {render json: @appointment}
+        end
       end
     elsif @current_physician
       unless @current_physician == @appointment.physician
-      flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
-        redirect_to appointments_path
+       flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
+        respond_to do |format|
+         format.html {redirect_to appointments_path}
+         format.json {render json: @appointment}
+       end
       end
     else
       flash[:notice] = "You have to be logged in to view this page"
@@ -64,8 +70,10 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     if @current_physician
       if @appointment.save
-        flash[:notice] = "Appointment was successfully created"
-        redirect_to appointment_path(@appointment)
+        respond_to do |format|
+          format.html {redirect_to appointment_path(@appointment)}
+          format.json {render json: @appointment}
+        end
       else
         flash[:notice] = "There was an error creating this appointment"
         render 'appointments/new'
