@@ -1,7 +1,7 @@
 class AppointmentsSerializer < ActiveModel::Serializer
   attributes :id, :date, :time
 
-  belongs_to :physician, serializer: PhysicianAppointmentSerializer
-  belongs_to :patient, serializer: PatientAppointmentSerializer
+  belongs_to :physician 
+  belongs_to :patient
 
 end

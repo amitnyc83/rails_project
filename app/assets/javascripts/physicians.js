@@ -14,7 +14,7 @@ $(() => {
 function listenForClick(){
   $('a.physician-data').on('click', function(e){
     e.preventDefault();
-    getPhysiciansData(this.href);
+    getPhysiciansData();
   })
 }
 
@@ -28,17 +28,19 @@ function listenForNewAppointmentFormClick(){
 
 
 // function called from event listener : listenForClick()
-function getPhysiciansData(url){
+function getPhysiciansData(){
   $.ajax({
-    url: url,
+    url: 'http://localhost:3000/physicians',
     method: 'GET',
-    dataType: 'json'
-  }).done(function(data){
-     console.log("the data is: ", data);
-        const newPhysician = new Physician(data)
-        const newPhysicianHTML = newPhysician.numOfAppointmentsHTML()
-        document.getElementById("physician-appointments-html-area").innerHTML += newPhysicianHTML
-
+    dataType: 'json',
+    success: function (data) {
+     console.log("the data is: ", data)
+     data.map(physician => {
+       const newPhysician = new Physician(physician)
+       const newPhysicianHTML = newPhysician.numOfAppointmentsHTML()
+       document.getElementById("physician-appointments-html-area").innerHTML += newPhysicianHTML
+      })
+    }
   })
 }
 
@@ -58,14 +60,13 @@ class Physician{
       <form>
       <input id='appointment-date' type='date' name='date'></input><br>
       <input id='appointment-time' type='time' name='time'></input><br>
-      <input id='appointment-physician' type='physician.id' name='physician'></input><br>
-      <input id='appointment-patient' type='patient.id' name='patient'></input><br>
+      <input id='appointment-physician' type='text' name='physician[name]'></input><br>
+      <input id='appointment-patient' type='text' name='patient[name]'></input><br>
       <input type='submit'/>
       </form>
-       `)
+    `)
   }
 }
-
 
 
 // After creating a instance of Object using JavaScript Object Model class, i can create a custom method on that instance using prototype

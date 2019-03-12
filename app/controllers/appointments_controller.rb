@@ -49,7 +49,7 @@ class AppointmentsController < ApplicationController
       elsif @current_physician
         if Physician.exists?(params[:physician_id])
           unless @current_physician == Physician.find(params[:physician_id])
-            redirect_to new_physician_appointment_path(@current_physician)
+           redirect_to new_physician_appointment_path(@current_physician)
           end
         elsif @current_physician
           flash[:notice] = "Only the physician logged in can create an appointment."
