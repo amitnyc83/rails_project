@@ -5,7 +5,7 @@ class PhysiciansController < ApplicationController
   def index
     @physicians = Physician.all
     respond_to do |format|
-      format.html {render :index}
+      format.html
       format.json {render json: @physicians}
     end
   end

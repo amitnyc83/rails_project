@@ -70,15 +70,16 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     if @current_physician
       if @appointment.save
-        respond_to do |format|
-          format.html {redirect_to appointment_path(@appointment)}
-          format.json {render json: @appointment}
-        end
+        render json: @appointment, status: 201
+        # respond_to do |format|
+        #   format.html {redirect_to appointment_path(@appointment)}
+        #   format.json {render json: @appointment}
+      end
       else
         flash[:notice] = "There was an error creating this appointment"
         render 'appointments/new'
       end
-    else
+     else
       flash[:notice] = "Only Physician's can create appointment"
       redirect_to patient_path(@current_patient)
     end
