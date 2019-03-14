@@ -48,10 +48,10 @@ const listenForClick = () => {
     fetch(`/physicians/${id}.json`)
     .then((response) => response.json())
     .then(physician => {
-      $("physician-appointments-html-area").html('')
+      $(`physician-appointments-html-area-${physician.id}`).html('')
       let newPhysician = new Physician(physician)
       let physicianHtml = newPhysician.numOfAppointmentsHTML()
-      document.getElementById("physician-appointments-html-area").innerHTML = physicianHtml
+      document.getElementById(`physician-appointments-html-area-${physician.id}`).innerHTML += physicianHtml
       console.log(newPhysician)
     });
   });
