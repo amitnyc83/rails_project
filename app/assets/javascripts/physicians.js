@@ -45,13 +45,13 @@ const listenForClick = () => {
   $('.js-physician-data').on('click', function(e){
     e.preventDefault();
     let id = $(this).attr("data-id");
-    fetch(`/physicians.json`)
+    fetch(`/physicians/${id}.json`)
     .then((response) => response.json())
     .then(physician => {
       $("physician-appointments-html-area").html('')
       let newPhysician = new Physician(physician)
       let physicianHtml = newPhysician.numOfAppointmentsHTML()
-      document.getElementById("physician-appointments-html-area").innerHTML += physicianHtml
+      document.getElementById("physician-appointments-html-area").innerHTML = physicianHtml
       console.log(newPhysician)
     });
   });

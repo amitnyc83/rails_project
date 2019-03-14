@@ -4,7 +4,7 @@
 
  <%= render :partial => "view", :locals => {:physician => physician} %>
 
-
+<button class="js-physician-data" data-id="<%=physician.id%>">Click to View more</button>
 <div id="physician-appointments-html-area"></div><br></br>
 
 <% end %>

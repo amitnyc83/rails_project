@@ -16,7 +16,7 @@ class PhysiciansController < ApplicationController
       @appointments = Appointment.upcoming.where("physician_id = ?", @current_physician.id)
       respond_to do |format|
         format.html {render :show}
-        format.json {render json: @current_physician}
+        format.json {render json: @physician}
       end
     else
       @appointments = nil
