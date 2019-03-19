@@ -6,40 +6,28 @@
 $(() => {
   console.log('physicians.js is loaded and its listening for a click now')
   listenForClick();
-  listenForNewAppointmentFormClick();
-  // listenForPhysicianData();
+  newAppointmentFormClick();
+  loadAppointmentClick();
+  // getPhysicians();
 });
 
-// function listenForPhysicianData(){
-//   $(function(){
-//     $(".js-physician-data").on('click', function(){
-//       let id = $(this).data("id");
-//       $.ajax({
-//         url: 'http://localhost:3000/physicians',
-//         method: 'GET',
-//         dataType: 'json',
-//         success: function(data){
-//           console.log("the data is: ", data)
-//           data.forEach(physician)
-//           if(physician.id == id){
-//             const newPhysician = new Physician(physician)
-//             const newPhysicianHtml = newPhysician.numOfAppointmentsHTML()
-//             document.getElementById("physician-appointments-html-area").innerHTML += newPhysicianHtml
-//           }
-//         }
-//       })
-//     })
-//   })
-// }
 
 
+const loadAppointmentClick = () => {
+ $('a.load-appointments').on('click', function(e){
+   $.ajax({
+     method: "GET",
+     url: this.href,
+   }).success(function(response){
+     $("div.appointments").html(response)
+   }).error(function(){
+     alert("Your Appointments could not be loaded")
+   })
+   e.preventDefault();
+  });
+}
 
-// function listenForClick(){
-//   $('a.physician-data').on('click', function(e){
-//     e.preventDefault();
-//     getPhysiciansData();
-//   })
-// }
+
 
 const listenForClick = () => {
   $('.js-physician-data').on('click', function(e){
@@ -57,29 +45,26 @@ const listenForClick = () => {
   });
 }
 
-// function getPhysiciansData(){
-//   $.ajax({
-//     url: 'http://localhost:3000/physicians',
-//     method: 'GET',
-//     dataType: 'json',
-//     success: function (data) {
-//      console.log("the data is: ", data)
-//      data.forEach(physician => {
-//        const newPhysician = new Physician(physician)
-//        const newPhysicianHTML = newPhysician.numOfAppointmentsHTML()
-//        document.getElementById("physician-appointments-html-area").innerHTML += newPhysicianHTML
-//       })
-//     }
-//   })
-// }
 
-function listenForNewAppointmentFormClick(){
-  $('a.new-appointment-form').on('click', function(e){
-    e.preventDefault();
-    let newAppointmentForm = Physician.newAppointmentForm();
-    document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
-  })
+Physician.prototype.physicianHtml = function(element){
+  $(element).append(`
+    <div class='physician'>
+     <table>
+        <tr>
+         <th>Name</th>
+         <td>${this.name}</td>
+        </tr>
+        <tr>
+         <th>Specialty</th>
+         <td>${this.specialty}</td>
+        </tr>
+      </table>
+    </div>
+  `)
 }
+
+
+
 
 function Physician(physician){
   this.id = physician.id,
@@ -103,27 +88,55 @@ Physician.prototype.numOfAppointmentsHTML = function(){
 }
 
 
+class Appointment{
+  constructor(appointment){
+   this.id = appointment.id,
+   this.date = appointment.date,
+   this.time = appointment.time,
+   this.physicianId = appointment.physician.id,
+   this.patientId = appointment.patient.id,
+   this.physicianName = appointment.physician.name,
+   this.patientName = appointment.patient.name,
+   this.physicianSlug = appointment.physician.slug,
+   this.patientSlug = appointment.patient.slug
+  }
+ static newAppointmentForm(){
+   return (`
+     <strong>New Appointment Form</strong>
+     <form>
+     Date: <input id='appointmentDate' type='date' name='appointment[date]'></input><br>
+     Time: <input id='appointmentTime' type='time' name='appointment[time]'></input><br>
+     Physician Name: <input id='appointmentPhysician' type='text' name='physician[name]'></input><br>
+     Patient Name: <input id='appointmentPatient' type='text' name='patient[name]'></input><br>
+     <input type='submit'/>
+     </form>
 
-//
-// function listenForNewAppointmentFormClick(){
-//   $('a.new-appointment-form').on('click', function(e){
-//     e.preventDefault();
-//     $.ajax({
-//       url: 'https://localhost:3000/appointments/new',
-//       method: 'get',
-//       dataType: 'html'
-//     }).done(function(response){
-//       $('div#new-appointment-form').html(response);
-//     })
-//   })
-// }
+     <div id='AppointmentData'>
+      <p id='appointmentPhysician'</p>
+      <p id='appointmentPatient'</p>
+      <p id='appointmentDate'</p>
+      <p id='appointmentTime'</p>
+     </div>
+    `)
+  }
+}
+
+const newAppointmentFormClick = () => {
+  $('.create-new-appointment-form').on('submit', function(e){
+    $.ajax({
+     type: ($('input[name="_method"]').val() || this.method),
+     url: this.action,
+     data: $(this).serialize(),
+     success: function(response){
+
+      }
+    });
+   e.preventDefault();
+ })
+}
 
 
-
-
-
-
-// JavaScript Object Model
+// JavaScript Object Model using constructor function and static form
 // class Physician{
 //   constructor(obj){
 //     this.id = obj.id,
@@ -134,28 +147,125 @@ Physician.prototype.numOfAppointmentsHTML = function(){
 //     this.appointments =obj.appointments;
 //   }
 //   static newAppointmentForm(){
-//     return (`
-//       <strong>New Appointment Form</strong>
-//       <form>
-//       Date: <input id='appointmentDate' type='date' name='date'></input><br>
-//       Time: <input id='appointmentTime' type='time' name='time'></input><br>
-//       Physician Name: <input id='appointmentPhysician' type='text' name='physician[name]' ></input><br>
-//       Patient Name: <input id='appointmentPatient' type='text' name='patient[name]'></input><br>
-//       <input type='submit'/>
-//       </form>
-//
-//       <div id="newAppointment">
-//       <p id="appointmentDate"></p>
-//       <p id="appointmentTime"></p>
-//       <p id="appointmentPhysician"></p>
-//       <p id="appointmentPatient"></p>
-//       </div>
-//     `)
+    // return (`
+    //   <strong>New Appointment Form</strong>
+    //   <form>
+    //   Date: <input id='appointmentDate' type='date' name='appointment[date]' id='appointmentdate'></input><br>
+    //   Time: <input id='appointmentTime' type='time' name='appointment[time]' id='appointmentTime' ></input><br>
+    //   Physician Name: <input id='appointmentPhysician' type='text' name='physician[name]'id='appointmentPhysician'></input><br>
+    //   Patient Name: <input id='appointmentPatient' type='text' name='patient[name]' id='appointmentPatient'></input><br>
+    //   <input type='submit'/>
+    //   </form>
+    //
+    //   <div id="newAppointment">
+    //   <p id="appointmentDate"></p>
+    //   <p id="appointmentTime"></p>
+    //   <p id="appointmentPhysician"></p>
+    //   <p id="appointmentPatient"></p>
+    //   </div>
+    // `)
 //   }
 // }
 
 
+
+
+// const listenForNewAppointmentFormClick =  () => {
+//   $('.create-new-appointment-form').on('click',function(e){
+//     e.preventDefault();
+//     let formData = $(this).serialize();
+//     let postAppointment = $.post(url, formData)
+//     postAppointment.done(function(data){
+//       console.log(data)
+//     });
+//     let newAppointmentForm = Physician.newAppointmentForm()
+//     document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
+//   });
+// }
+
+
+
+
+
+
+
+
+// const newAppointmentForm = function(){
+//   return (`
+//       <strong>New Appointment Form</strong>
+//       <form>
+//        <input id='appointment-date' type='date' name='appointment[date]'</input><br>
+//        <input id='appointment-time' type='time' name='appointment[time]'</input><br>
+//        <input id='appointment_physician_id' type='text' select name='appointment[physician_id]' id='appointment_physician_id'</input><br>
+//        <input id='appointment_patient_id' type='text' select_name='appointment[pateint_id]' id='appointment_pateint_id'</input><br>
+//        <input type='submit'/>
+//       </form>
+//     `)
+// }
+
+
+
+
+// Physician.prototype.newAppointmentForm = function() {
+//   return (`
+//     <strong>New Appointment Form</strong>
+//     <form>
+//      <input id='appointment-date' type='date' name='appointment[date]'</input><br>
+//      <input id='appointment-time' type='time' name='appointment[time]'</input><br>
+//      <input id='appointment_physician_id' type='text' select name='appointment[physician_id]' id='appointment_physician_id'</input><br>
+//      <input id='appointment_patient_id' type='text' select_name='appointment[pateint_id]' id='appointment_pateint_id'</input><br>
+//      <input type='submit'/>
+//     </form>
+//   `)
+// }
+
+
+// function listenForNewAppointmentFormClick(){
+//   $('a.create-new-appointment-form').on('click', function(e){
+//     e.preventDefault();
+//       let newAppointmentForm = Physician.newAppointmentForm();
+//       document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
+//       console.log(newAppointment)
+//   });
+// }
+
+
+
+
+// function listenForClick(){
+//   $('.js-physician-data').on('click', function(e){
+//     e.preventDefault();
+//     getPhysiciansData();
+//   })
+// }
+
+// this is the ES5 way
+
+// function listenForPhysicianData(){
+//   $(function(){
+//     $(".js-physician-data").on('click', function(e){
+//       let id = $(this).data("id");
+//       $.ajax({
+//         url: `http://localhost:3000/physicians/${id}.json`,
+//         method: 'GET',
+//         dataType: 'json',
+//         success: function(data){
+//            $(`physician-appointments-html-area-${physician.id}`).html('')
+//             let newPhysician = new Physician(physician)
+//             let newPhysicianHtml = newPhysician.numOfAppointmentsHTML()
+//             document.getElementById(`physician-appointments-html-area-${physician.id}`).innerHTML = newPhysicianHtml
+//           }
+//         }
+//       })
+//     })
+//   })
+// }
+
+
+
+
 // After creating a instance of Object using JavaScript Object Model class, i can create a custom method on that instance using prototype
+// Just a different way of doing the above with a return instaed of a variable
 // Physician.prototype.numOfAppointmentsHTML = function (){
 //   return (`
 //     <div>
@@ -166,18 +276,3 @@ Physician.prototype.numOfAppointmentsHTML = function(){
 //     </div>
 //   `)
 // }
-
-$(function(){
-  $('form').submit(function(event){
-    event.preventDefault();
-    var values = $(this).serialize();
-    var posting = $.post(`/physicians/${physician.slug}`, values);
-    posting.done(function(data){
-      var appointment = data;
-      $("#appointmentDate").text(appointment["date"]);
-      $("#appointmentTime").text(appointment["time"]);
-      $("#appointmentPhysician").text(appointment["physician"]["name"]);
-      $("#appointmentPatient").text(appointment["patient"]["name"]);
-    });
-  });
-});
