@@ -3,7 +3,7 @@
 <%= render :partial => "view", :locals => { :a => @appointment} %>
 
 
-<%= link_to "View All Appointments", appointments_path %>
+<%= link_to "View All Appointments", appointments_path, class:"view-all-appointments" %>
 <br>
 
 <% if @current_physician %>

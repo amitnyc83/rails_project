@@ -1,4 +1,4 @@
-<div class="field">
+<div class="appointmentDate">
 <p>
 <%= f.label :date %><br>
 <%= f.date_field :date, value: appointment.date  %>
@@ -12,7 +12,7 @@
 
 
 
-<div class="field">
+<div class="appointmentTime">
 <p>
   <%= f.label :time %><br>
   <%= f.time_field :time, value: "%r%I:%M:%S %p", value: appointment.time %>
@@ -26,7 +26,7 @@
 
 
 
-<div class="field">
+<div class="appointmentPhysician">
 <p>
   <%= f.label :physician_id, "Physician" %><br>
   <%= f.collection_select :physician_id, Physician.all.order('name ASC'), :id, :name, {selected: @current_physician}  %>
@@ -40,7 +40,7 @@
 
 
 
-<div class="field">
+<div class="appointmentPatient">
 <p>
   <%= f.label :patient_id, "Patient" %><br>
   <%= f.collection_select :patient_id, Patient.all.order('name ASC'), :id, :name, include_blank: "Select a patient" %>

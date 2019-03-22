@@ -7,9 +7,27 @@ $(() => {
   console.log('physicians.js is loaded and its listening for a click now')
   listenForClick();
   listenForNewAppointmentFormClick();
-  listenForSubmitAppointmentFormClick();
+  // listenForSubmitAppointmentFormClick();
   loadAppointmentsClick();
+  // viewAllAppointments();
 });
+
+
+
+
+const listenForNewAppointmentFormClick =  () => {
+  $('form').submit(function(e){
+    e.preventDefault();
+    let url = this.action;
+    let values = $(this).serialize();
+    let posting = $.post(url, values)
+    posting.done(function(data){
+      let newAppointment = new Appointment(data);
+      let appointmentHtml = newAppointment.getAppointmentInfo()
+      document.getElementById("appointment-results").innerHTML = appointmentHtml
+    });
+  });
+}
 
 
 
@@ -34,6 +52,22 @@ const loadAppointmentsClick = () => {
     })
   })
 }
+
+
+
+//
+// const viewAllAppointments = () => {
+//   $('a.view-all-appointments').on('click', function(e){
+//     e.preventDefault();
+//     $.post(this.href).done(function(json){
+//       json.forEach(function(appointment){
+//         let newAppointment = new Appointment(appointment)
+//         let appointmentHtml = newAppointment.getAppointmentInfo()
+//         document.getElementById()
+//       })
+//     })
+//   })
+// }
 
 
 
@@ -155,26 +189,26 @@ Physician.newAppointmentForm = function() {
     </div>
  `)
 }
+//
+// const listenForNewAppointmentFormClick = () => {
+//   $('a.create-new-appointment-form').on('click', function(e){
+//     e.preventDefault();
+//     let newAppointmentForm = Physician.newAppointmentForm();
+//     document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
+//   });
+// }
+//
+// const listenForSubmitAppointmentFormClick = () => {
+//   $('a.submit-appointment-form').on('submit', function(e){
+//     e.preventDefault();
+//     let $form = $(this);
+//     let url = "/appointments"
+//     let formData = $(this).serialize();
+//     let posting = $.post(url, formData, function(response){
+//     }).success($('a.create-new-appointment-form').reset()).then(getAppointmentInfo());
+//
+//   })
 
-const listenForNewAppointmentFormClick = () => {
-  $('a.create-new-appointment-form').on('click', function(e){
-    e.preventDefault();
-    let newAppointmentForm = Physician.newAppointmentForm();
-    document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
-  });
-}
-
-const listenForSubmitAppointmentFormClick = () => {
-  $('a.submit-appointment-form').on('submit', function(e){
-    e.preventDefault();
-    let $form = $(this);
-    let url = "/appointments"
-    let formData = $(this).serialize();
-    let posting = $.post(url, formData, function(response){
-    }).success($('a.create-new-appointment-form').reset()).then(getAppointmentInfo());
-
-  })
-}
 
 
 
@@ -205,19 +239,7 @@ const listenForSubmitAppointmentFormClick = () => {
 
 //class="new_appointment" id="new_appointment" action="/appointments" accept-charset="UTF-8" method="post"
 
-// const listenForNewAppointmentFormClick =  () => {
-//   $('.create-new-appointment-form').on('click',function(e){
-//     e.preventDefault();
-//     let url = this.action;
-//     let formData = $(this).serialize();
-//     let postAppointment = $.post(url, formData)
-//     postAppointment.done(function(data){
-//       console.log(data)
-//     });
-//     let newAppointmentForm = Physician.newAppointmentForm()
-//     document.querySelector('div#new-appointment-form').innerHTML = newAppointmentForm
-//   });
-// }
+
 
 
 

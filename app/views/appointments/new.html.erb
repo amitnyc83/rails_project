@@ -3,9 +3,17 @@
 <%= form_for @appointment do |f| %>
 
 <%= render :partial => 'form', :locals => { :appointment => @appointment, :f => f} %>
+<div class="actions">
+<%= f.button "Book Appointment" %>
+</div>
 
-<%= f.submit "Book Appointment" %>
+
 <% end %>
 
 
+
 <%= link_to "Back", appointments_path %>
+
+
+<div id="appointment-results">
+</div>

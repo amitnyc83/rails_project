@@ -7,8 +7,10 @@ class AppointmentsController < ApplicationController
   def index
     if @current_patient
       @appointments = @current_patient.appointments
-    elsif @current_physician == Physician.find(params[:physician_id])
+    elsif @current_physician
       @appointments = @current_physician.appointments
+      # render :layout => false
+      render :json => @appointments
     else
       flash[:notice] = "You are not allowed to view this page! Please log in!"
       redirect_to root_path
@@ -26,11 +28,11 @@ class AppointmentsController < ApplicationController
       end
     elsif @current_physician
       unless @current_physician == @appointment.physician
-       flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
+        flash[:notice] = "Only the Physician and Patient of this appointment can view this page"
         respond_to do |format|
-         format.html {redirect_to appointments_path}
-         format.json {render json: @appointment}
-       end
+          format.html {redirect_to appointments_path}
+          format.json {render json: @appointment}
+        end
       end
     else
       flash[:notice] = "You have to be logged in to view this page"
@@ -49,14 +51,14 @@ class AppointmentsController < ApplicationController
       elsif @current_physician
         if Physician.exists?(params[:physician_id])
           unless @current_physician == Physician.find(params[:physician_id])
-           redirect_to new_physician_appointment_path(@current_physician)
+            redirect_to new_physician_appointment_path(@current_physician)
           end
         elsif @current_physician
           flash[:notice] = "Only the physician logged in can create an appointment."
           redirect_to physician_path(@current_physician)
-          else
-            flash[:notice] = "Please sign in as a physician to create an appointment."
-            redirect_to root_path
+        else
+          flash[:notice] = "Please sign in as a physician to create an appointment."
+          redirect_to root_path
         end
       end
     else
@@ -70,18 +72,15 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     if @current_physician
       if @appointment.save
-        render json: @appointment, status: 201
+        flash[:notice] = "Appointment was successfully created"
         # respond_to do |format|
         #   format.html {redirect_to appointment_path(@appointment)}
-        #   format.json {render json: @appointment}
+        #   format.json {render json: @appointment, status: 201}
+        render json: @appointment, status: 201
       end
-      else
-        flash[:notice] = "There was an error creating this appointment"
-        render 'appointments/new'
-      end
-     else
-      flash[:notice] = "Only Physician's can create appointment"
-      redirect_to patient_path(@current_patient)
+    else
+      flash[:notice] = "There was an error creating this appointment"
+      render 'appointments/new'
     end
   end
 
@@ -131,15 +130,15 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  private
 
-      private
+  def appointment_params
+    params.require(:appointment).permit(:date, :time, :patient_id, :physician_id)
+  end
 
-      def appointment_params
-        params.require(:appointment).permit(:date, :time, :patient_id, :physician_id)
-      end
+  def find_appointment
+    @appointment = Appointment.find(params[:id])
+  end
 
-      def find_appointment
-        @appointment = Appointment.find(params[:id])
-      end
 
 end
