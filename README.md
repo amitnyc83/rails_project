@@ -22,6 +22,10 @@ Installation Guide
 To fork this folder go to https://github.com/amitnyc83/rails_project/blob/rails-w/-js-appointment-project/app/controllers/physicians_controller.rb (MAKE SURE TO SELECT THE RAILS-W/JS-APPOINTMENT-PROJECT BRANCH) After forking the project click clone/download and clicking on the clipboard to install in your terminal by typing "git clone" and paste the file you just copied.Type 'rake db:migrate' in your terminal to migrate your tables to the database and then 'rake db:seed' to fill the tables with information. Load all the gems to get the app working properly by typing "bundle install". Finally, type "rails server" int he terminal to start the app in the browser
 
 
+How to use the App
+If you would like to demo the app to see it working; you can login in as a physician or patient. To login as a Physician use "Physician1@physician1.com" as email and "password" as your password. To login as a Patient use "testpatient1@testpatient1.com" as email and "password" as your password.
+
+
 Contributors guide
 
 To file an issue with a pull request or report a bug,  navigate https://github.com/amitnyc83/rails_project/issues/new. All contributions are welcome.

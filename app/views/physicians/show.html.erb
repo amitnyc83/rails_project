@@ -10,8 +10,12 @@
 
 <% if @physician == current_physician %>
 <p><%= link_to "Edit Your Personal Info", edit_physician_path, class:"edit-physician-info"  %></p>
-<p><%= link_to "View All Your Appointments", physician_appointments_path(@physician), class:"all-appointments"  %></p>
-<p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"new-appointment-form"  %></p>
+<p><%= link_to "View All Your Appointments", physician_appointments_path(@physician), class:"load-appointments"  %></p>
+<div id="appointments">
+  <ol>
+  </ol>
+</div>
+<p><%= link_to "Create New Appointment", new_physician_appointment_path(@physician), class:"create-new-appointment-form"  %></p>
 <div id='new-appointment-form'></div>
 <% end %>
 
@@ -21,10 +25,10 @@
 <%= render :partial => "appointments/view", :locals => {:a => a} %>
 <% end %>
 
-
-
 <% elsif @physician == current_physician %>
 <h2>You have no upcoming appointments</h2>
 <% end %>
+
+
 
 <p><%= link_to "View All Physician", physicians_path, class:"btn btn-primary btn-light" %><p>
