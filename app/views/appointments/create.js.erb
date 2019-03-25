@@ -1,0 +1,3 @@
+$('#new-appointment-form').val('');
+var $ol = $('div.appointments ol')
+$ol.append("<%=j(render("physicians/${physician.slug}/appointment", :appointment => @appointment))%>");

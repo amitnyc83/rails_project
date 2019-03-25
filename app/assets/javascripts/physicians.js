@@ -22,9 +22,14 @@ const listenForNewAppointmentFormClick =  () => {
     let values = $(this).serialize();
     let posting = $.post(url, values)
     posting.done(function(data){
-      let newAppointment = new Appointment(data);
-      let appointmentHtml = newAppointment.getAppointmentInfo()
-      document.getElementById("appointment-results").innerHTML = appointmentHtml
+      let appointment = data;
+      $("#appointmentPhysician").text(appointment["physician"]["name"]);
+      $("#appointmentPatient").text(appointment["patient"]["name"]);
+      $("#appointmentDate").text(appointment["date"]);
+      $("#appointmentTime").text(appointment["time"]);
+      // let newAppointment = new Appointment(data);
+      // let appointmentHtml = newAppointment.getAppointmentInfo()
+      // document.getElementById("appointment-results").innerHTML = appointmentHtml
     });
   });
 }
